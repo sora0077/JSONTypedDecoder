@@ -19,15 +19,13 @@ extension Decoder {
 
     public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T] where T: Decodable {
         let dict: [String: T?] = try decode(forKeyPath: keyPath)
-        var result: [String: T] = [:]
-        for (key, value) in dict {
-            guard let v = value else {
-                if allowInvalidElements { continue }
-                throw DecodeError.typeMissmatch(expected: T.self, actual: value, keyPath: keyPath)
+        return try dict.flatMap {
+            guard let value = $0 else {
+                if allowInvalidElements { return nil }
+                throw DecodeError.typeMissmatch(expected: T.self, actual: $0, keyPath: keyPath)
             }
-            result[key] = v
+            return value
         }
-        return result
     }
 
     public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T]? where T: Decodable {

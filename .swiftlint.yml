@@ -4,4 +4,4 @@ excluded:
 disabled_rules:
   - identifier_name
 
-line_length: 150
+line_length: 160
