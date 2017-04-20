@@ -13,6 +13,7 @@ extension String {
     static let `nil`: String? = .none
 }
 
+// swiftlint:disable nesting
 class JSONTypedDecoderTests: XCTestCase {
 
     override func setUp() {
@@ -23,6 +24,50 @@ class JSONTypedDecoderTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+    }
+
+    func testDecodable() {
+        struct Test: Decodable {
+            let a: Int
+            let b: String
+
+            static func decode(_ decoder: Decoder) throws -> Test {
+                return try self.init(
+                    a: decoder.decode(forKeyPath: "a"),
+                    b: decoder.decode(forKeyPath: "b"))
+            }
+        }
+
+        let data: Any = [
+            "a": 1, "b": "test"
+        ]
+        let test = try? decode(data) as Test
+        XCTAssertEqual(test?.a, 1)
+        XCTAssertEqual(test?.b, "test")
+    }
+
+    func testNestedDecodable() {
+        struct Test: Decodable {
+            let a: Int
+            let b: String
+
+            static func decode(_ decoder: Decoder) throws -> Test {
+                return try self.init(
+                    a: decoder.decode(forKeyPath: "a"),
+                    b: decoder.decode(forKeyPath: "b"))
+            }
+        }
+
+        let data: Any = [
+            "root": ["a": 1, "b": "test"]
+        ]
+        do {
+            let test = try decode(data, rootKeyPath: "root") as Test
+            XCTAssertEqual(test.a, 1)
+            XCTAssertEqual(test.b, "test")
+        } catch {
+            XCTFail("\(error)")
+        }
     }
 
     func testExample() {

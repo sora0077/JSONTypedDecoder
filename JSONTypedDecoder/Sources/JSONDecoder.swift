@@ -20,8 +20,6 @@ func optional<T>(_ value: @autoclosure () throws -> T?, if cond: (Error) -> Bool
 }
 
 struct JSONDecoder: Decoder {
-    var rawValue: Any { return data.rawValue }
-    private let data: Data
     fileprivate enum Data {
         case dictionary(JSONDictionary)
         case array(JSONArray)
@@ -35,6 +33,8 @@ struct JSONDecoder: Decoder {
             }
         }
     }
+    var rawValue: Any { return data.rawValue }
+    private let data: Data
     init(dictionary: [String: Any]) {
         data = .dictionary(dictionary)
     }
@@ -54,6 +54,12 @@ struct JSONDecoder: Decoder {
             self.init(value: any)
         }
     }
+    init(_ any: Any, rootKeyPath: KeyPath) throws {
+        guard let v: Any = try value(for: rootKeyPath, from: any) else {
+            throw DecodeError.missingKeyPath(rootKeyPath)
+        }
+        self.init(v)
+    }
 
     fileprivate func optionalValue<T>(forKeyPath keyPath: KeyPath) throws -> T? {
         return try optional(value(for: keyPath, from: rawValue), if: { (error) in
@@ -68,6 +74,7 @@ struct JSONDecoder: Decoder {
 /// decode for value
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
+        print(rawValue)
         guard let v: T = try optionalValue(forKeyPath: keyPath) else {
             return nil
         }
@@ -149,7 +156,7 @@ private extension KeyPath.Component {
     }
 }
 
-private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {
+private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {  // swiftlint:disable:this cyclomatic_complexity
     var result: Any? = json
     var reached: [KeyPath.Component] = []
     for key in keyPath {
@@ -171,11 +178,14 @@ private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {
         default: break
         }
     }
-    if result is NSNull {
+    switch result {
+    case is NSNull:
         return nil
-    }
-    guard let value = result as? T? else {
+    case nil:
+        return nil
+    case let value as T:
+        return value
+    default:
         throw DecodeError.typeMissmatch(expected: T.self, actual: result, keyPath: keyPath)
     }
-    return value
 }

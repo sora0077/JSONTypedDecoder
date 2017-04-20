@@ -18,6 +18,7 @@
 		D98ED48D1EA8A5C400B7962A /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ED48C1EA8A5C400B7962A /* KeyPath.swift */; };
 		D98ED48F1EA8AE6F00B7962A /* Decodable+StdLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ED48E1EA8AE6F00B7962A /* Decodable+StdLib.swift */; };
 		D98ED4911EA8AE9600B7962A /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ED4901EA8AE9600B7962A /* Decodable.swift */; };
+		D9A5F19D1EA9105B00A4D894 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F19C1EA9105B00A4D894 /* decode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		D98ED48C1EA8A5C400B7962A /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		D98ED48E1EA8AE6F00B7962A /* Decodable+StdLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+StdLib.swift"; sourceTree = "<group>"; };
 		D98ED4901EA8AE9600B7962A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		D9A5F19C1EA9105B00A4D894 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
 		F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -140,6 +142,7 @@
 				D988398A1EA8D1E9009C9A8B /* JSONDecoder.swift */,
 				D98ED48A1EA8A4FC00B7962A /* Error.swift */,
 				D98ED48C1EA8A5C400B7962A /* KeyPath.swift */,
+				D9A5F19C1EA9105B00A4D894 /* decode.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9A5F19D1EA9105B00A4D894 /* decode.swift in Sources */,
 				D988398B1EA8D1E9009C9A8B /* JSONDecoder.swift in Sources */,
 				D98ED48D1EA8A5C400B7962A /* KeyPath.swift in Sources */,
 				D98ED48F1EA8AE6F00B7962A /* Decodable+StdLib.swift in Sources */,
