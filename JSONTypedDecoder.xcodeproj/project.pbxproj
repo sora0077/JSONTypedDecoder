@@ -23,6 +23,7 @@
 		D9A5F1AE1EA9206100A4D894 /* Decoder+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */; };
 		D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */; };
 		D9A5F1B21EA924E600A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1B11EA924E600A4D894 /* Utils.swift */; };
+		D9A5F1B41EA92B2D00A4D894 /* Decodable+RawRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1B31EA92B2D00A4D894 /* Decodable+RawRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Dictionary.swift"; sourceTree = "<group>"; };
 		D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Transform.swift"; sourceTree = "<group>"; };
 		D9A5F1B11EA924E600A4D894 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		D9A5F1B31EA92B2D00A4D894 /* Decodable+RawRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+RawRepresentable.swift"; sourceTree = "<group>"; };
 		F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 			children = (
 				D9A5F1A71EA91FCF00A4D894 /* Decodable.swift */,
 				D9A5F1A81EA91FCF00A4D894 /* Decodable+StdLib.swift */,
+				D9A5F1B31EA92B2D00A4D894 /* Decodable+RawRepresentable.swift */,
 			);
 			path = Decodable;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				D9A5F1AE1EA9206100A4D894 /* Decoder+Dictionary.swift in Sources */,
 				D9A5F1A31EA91F8400A4D894 /* JSONDecoder.swift in Sources */,
 				D9A5F1A01EA91F5800A4D894 /* Decoder.swift in Sources */,
+				D9A5F1B41EA92B2D00A4D894 /* Decodable+RawRepresentable.swift in Sources */,
 				D9A5F1A91EA91FCF00A4D894 /* Decodable.swift in Sources */,
 				D9A5F1B21EA924E600A4D894 /* Utils.swift in Sources */,
 				D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */,
