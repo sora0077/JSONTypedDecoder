@@ -110,6 +110,35 @@ extension JSONDecoder {
     }
 }
 
+/// decode for dictionary
+extension JSONDecoder {
+    private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable {
+        guard let dictionary: [String: Any?] = try optionalValue(forKeyPath: keyPath) else {
+            return nil
+        }
+        do {
+            var result: [String: T?] = [:]
+            for (key, value) in dictionary {
+                if let value = value {
+                    result[key] = try T.decode(JSONDecoder(value))
+                } else {
+                    result.updateValue(nil, forKey: key)
+                }
+            }
+            return result
+        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
+            throw DecodeError.typeMissmatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        }
+    }
+
+    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String : T?] where T : Decodable {
+        guard let dictionary: [String: T?] = try _decode(forKeyPath: keyPath) else {
+            throw DecodeError.missingKeyPath(keyPath)
+        }
+        return dictionary
+    }
+}
+
 // MARK: - util
 private extension KeyPath.Component {
     var expectedType: Any.Type {

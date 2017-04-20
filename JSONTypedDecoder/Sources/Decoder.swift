@@ -11,14 +11,23 @@ import Foundation
 public protocol Decoder {
     var rawValue: Any { get }
 
+    // required
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable
-    func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable
 
-    // MARL: array
-    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T] where T: Decodable
-    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T]? where T: Decodable
+    // MARK: array
+    // required
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
-    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T] where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T]? where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable
+
+    // MARK: dictionary
+    // required
+    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T] where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T]? where T: Decodable
+//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable
 }
 
 extension Decoder {
@@ -60,6 +69,44 @@ extension Decoder {
     public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T : Decodable {
         do {
             return try decode(forKeyPath: keyPath) as [T?]
+        } catch DecodeError.missingKeyPath {
+            return nil
+        }
+    }
+
+    // MARK: dictionary
+    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T] where T: Decodable {
+        return try decode(forKeyPath: keyPath, allowInvalidElements: false)
+    }
+
+    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T]? where T: Decodable {
+        return try decode(forKeyPath: keyPath, allowInvalidElements: false)
+    }
+
+    public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T] where T: Decodable {
+        let dict: [String: T?] = try decode(forKeyPath: keyPath)
+        var result: [String: T] = [:]
+        for (key, value) in dict {
+            guard let v = value else {
+                if allowInvalidElements { continue }
+                throw DecodeError.typeMissmatch(expected: T.self, actual: value, keyPath: keyPath)
+            }
+            result[key] = v
+        }
+        return result
+    }
+
+    public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T]? where T: Decodable {
+        do {
+            return try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements) as [String: T]
+        } catch DecodeError.missingKeyPath {
+            return nil
+        }
+    }
+
+    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable {
+        do {
+            return try decode(forKeyPath: keyPath) as [String: T?]
         } catch DecodeError.missingKeyPath {
             return nil
         }
