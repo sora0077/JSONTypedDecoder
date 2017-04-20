@@ -120,6 +120,42 @@ class JSONTypedDecoderTests: XCTestCase {
         }
     }
     
+    func testArray() {
+        let data: Any = [
+            "array": [1, 2, 3]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "array"
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), [1, 2, 3])
+    }
+    
+    func testArrayWithOptionalSafe() {
+        let data: Any = [
+            "array": [1, nil, 3]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "array"
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidFragments: true), [1, 3])
+    }
+    
+    func testArrayWithOptional() {
+        let data: Any = [
+            "array": [1, nil, 3]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "array"
+        do {
+            let _: [Int] = try decoder.decode(forKeyPath: keyPath)
+            XCTFail()
+        } catch let DecodeError.typeMissmatch(expected, actual, keyPath) {
+            XCTAssertEqual("\(expected)", "\(Int.self)")
+            XCTAssert(actual == nil)
+            XCTAssertEqual(keyPath, "array")
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

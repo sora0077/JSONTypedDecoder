@@ -15,7 +15,13 @@ public protocol Decoder {
     // Optional
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable
     func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R? where T: Decodable
+    // Array
+    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidFragments: Bool) throws -> [T] where T: Decodable
+    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
 }
 
 extension Decoder {
+    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T] where T: Decodable {
+        return try decode(forKeyPath: keyPath, allowInvalidFragments: false)
+    }
 }
