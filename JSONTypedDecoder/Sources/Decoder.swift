@@ -18,19 +18,4 @@ public protocol Decoder {
 }
 
 extension Decoder {
-    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable {
-        guard let value: T = try decode(forKeyPath: keyPath) else {
-            throw DecodeError.missingKeyPath(keyPath)
-        }
-        return value
-    }
-    
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R where T : Decodable {
-        let value: T = try decode(forKeyPath: keyPath)
-        do {
-            return try transform(value)
-        } catch {
-            throw DecodeError.transformFailure(error, keyPath: keyPath)
-        }
-    }
 }

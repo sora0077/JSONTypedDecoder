@@ -9,6 +9,10 @@
 import XCTest
 @testable import JSONTypedDecoder
 
+extension String {
+    static let `nil`: String? = .none
+}
+
 class JSONTypedDecoderTests: XCTestCase {
     
     override func setUp() {
@@ -51,6 +55,33 @@ class JSONTypedDecoderTests: XCTestCase {
         } catch {
             XCTFail("\(error)")
         }
+    }
+    
+    func testMissingInMidFlow() {
+        let data: Any = [
+            ["int": 0],
+            ["int": 1]
+            ] as [[String: Any]]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = [1, "title", "val"]
+        do {
+            let _: String = try decoder.decode(forKeyPath: keyPath)
+            XCTFail()
+        } catch DecodeError.missingKeyPath(let missing) {
+            XCTAssertEqual(missing, [1, "title"])
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+    
+    func testMissingInMidFlowWithOptional() {
+        let data: Any = [
+            ["int": 0],
+            ["int": 1]
+            ] as [[String: Any]]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = [1, "title", "val"]
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), String.nil)
     }
     
     func testTypeMissmatched() {
