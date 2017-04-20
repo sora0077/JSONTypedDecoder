@@ -9,7 +9,7 @@
 import Foundation
 
 extension Decoder {
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R where T : Decodable {
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R where T: Decodable {
         let value: T = try decode(forKeyPath: keyPath)
         do {
             return try transform(value)
@@ -18,7 +18,7 @@ extension Decoder {
         }
     }
 
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R? where T : Decodable {
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R? where T: Decodable {
         let value: T? = try decode(forKeyPath: keyPath)
         do {
             return try value.map(transform)
@@ -29,15 +29,10 @@ extension Decoder {
 }
 
 extension Decoder {
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [R] where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
-    }
-
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [R]? where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
-    }
-
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [R] where T: Decodable {
+    public func decode<T, R>(
+        forKeyPath keyPath: KeyPath,
+        allowInvalidElements: Bool = false,
+        transform: (T) throws -> R) throws -> [R] where T: Decodable {
         let value: [T] = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
         return try value.flatMap {
             do {
@@ -48,7 +43,10 @@ extension Decoder {
         }
     }
 
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [R]? where T: Decodable {
+    public func decode<T, R>(
+        forKeyPath keyPath: KeyPath,
+        allowInvalidElements: Bool = false,
+        transform: (T) throws -> R) throws -> [R]? where T: Decodable {
         let value: [T]? = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
         return try value?.flatMap {
             do {
@@ -83,15 +81,10 @@ extension Decoder {
 }
 
 extension Decoder {
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
-    }
-
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
-    }
-
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
+    public func decode<T, R>(
+        forKeyPath keyPath: KeyPath,
+        allowInvalidElements: Bool = false,
+        transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
         let value: [String: T] = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
         return try value.flatMap {
             do {
@@ -102,7 +95,10 @@ extension Decoder {
         }
     }
 
-    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
+    public func decode<T, R>(
+        forKeyPath keyPath: KeyPath,
+        allowInvalidElements: Bool = false,
+        transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
         let value: [String: T]? = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
         return try value?.flatMap {
             do {
