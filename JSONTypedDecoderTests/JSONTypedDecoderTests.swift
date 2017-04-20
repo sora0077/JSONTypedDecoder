@@ -243,6 +243,36 @@ class JSONTypedDecoderTests: XCTestCase {
         }
     }
 
+    func testEnum() {
+        enum Test: Int, Decodable {
+            case a = 10
+        }
+        let data: Any = ["test": 10]
+        do {
+            let test: Test = try decode(data, rootKeyPath: "test")
+            XCTAssertEqual(test, .a)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+
+    func testEnumFailure() {
+        enum Test: Int, Decodable {
+            case a = 10
+        }
+        let data: Any = ["test": 1]
+        do {
+            let _: Test = try decode(data, rootKeyPath: "test")
+            XCTFail()
+        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
+            XCTAssertEqual("\(expected)", "\(Test.self)")
+            XCTAssertEqual(actual as? Int, 1)
+            XCTAssert(missmatched.isEmpty)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
