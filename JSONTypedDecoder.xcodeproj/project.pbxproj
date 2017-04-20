@@ -19,6 +19,9 @@
 		D9A5F1A51EA91FA400A4D894 /* decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1A41EA91FA400A4D894 /* decode.swift */; };
 		D9A5F1A91EA91FCF00A4D894 /* Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1A71EA91FCF00A4D894 /* Decodable.swift */; };
 		D9A5F1AA1EA91FCF00A4D894 /* Decodable+StdLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1A81EA91FCF00A4D894 /* Decodable+StdLib.swift */; };
+		D9A5F1AC1EA9202100A4D894 /* Decoder+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AB1EA9202100A4D894 /* Decoder+Array.swift */; };
+		D9A5F1AE1EA9206100A4D894 /* Decoder+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */; };
+		D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +53,9 @@
 		D9A5F1A41EA91FA400A4D894 /* decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = decode.swift; sourceTree = "<group>"; };
 		D9A5F1A71EA91FCF00A4D894 /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
 		D9A5F1A81EA91FCF00A4D894 /* Decodable+StdLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+StdLib.swift"; sourceTree = "<group>"; };
+		D9A5F1AB1EA9202100A4D894 /* Decoder+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Array.swift"; sourceTree = "<group>"; };
+		D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Dictionary.swift"; sourceTree = "<group>"; };
+		D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Transform.swift"; sourceTree = "<group>"; };
 		F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,6 +155,9 @@
 			isa = PBXGroup;
 			children = (
 				D9A5F19F1EA91F5800A4D894 /* Decoder.swift */,
+				D9A5F1AB1EA9202100A4D894 /* Decoder+Array.swift */,
+				D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */,
+				D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */,
 			);
 			path = Decoder;
 			sourceTree = "<group>";
@@ -383,9 +392,12 @@
 				D9A5F1AA1EA91FCF00A4D894 /* Decodable+StdLib.swift in Sources */,
 				D9A5F1A51EA91FA400A4D894 /* decode.swift in Sources */,
 				D98ED48D1EA8A5C400B7962A /* KeyPath.swift in Sources */,
+				D9A5F1AE1EA9206100A4D894 /* Decoder+Dictionary.swift in Sources */,
 				D9A5F1A31EA91F8400A4D894 /* JSONDecoder.swift in Sources */,
 				D9A5F1A01EA91F5800A4D894 /* Decoder.swift in Sources */,
 				D9A5F1A91EA91FCF00A4D894 /* Decodable.swift in Sources */,
+				D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */,
+				D9A5F1AC1EA9202100A4D894 /* Decoder+Array.swift in Sources */,
 				D98ED48B1EA8A4FC00B7962A /* Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
