@@ -11,23 +11,9 @@ import Foundation
 public protocol Decoder {
     var rawValue: Any { get }
 
-    // required
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable
-
-    // MARK: array
-    // required
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T] where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T]? where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable
-
-    // MARK: dictionary
-    // required
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T] where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [String: T]? where T: Decodable
-//    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable
 }
 
 extension Decoder {

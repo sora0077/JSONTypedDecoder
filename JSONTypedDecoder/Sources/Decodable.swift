@@ -12,15 +12,6 @@ public protocol Decodable {
     static func decode(_ decoder: Decoder) throws -> Self
 }
 
-struct Test: Decodable {
-    let val: Int
-
-    static func decode(_ decoder: Decoder) throws -> Test {
-        return try self.init(
-            val: decoder.decode(forKeyPath: "val"))
-    }
-}
-
 func castOrFail<T>(_ decoder: Decoder) throws -> T {
     return try castOrFail(decoder.rawValue)
 }
