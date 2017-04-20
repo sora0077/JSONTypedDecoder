@@ -84,30 +84,9 @@ extension JSONDecoder {
         }
         return value
     }
-
-    func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R where T : Decodable {
-        let value: T = try decode(forKeyPath: keyPath)
-        do {
-            return try transform(value)
-        } catch {
-            throw DecodeError.transformFailure(error, keyPath: keyPath)
-        }
-    }
-
-    // MARK: - Optional
-    func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
-        do {
-            return try _decode(forKeyPath: keyPath)
-        } catch DecodeError.missingKeyPath {
-            return nil
-        }
-    }
-
-    func decode<T, R>(forKeyPath keyPath: KeyPath, _ transform: (T) throws -> R) throws -> R? where T : Decodable {
-        fatalError()
-    }
 }
 
+/// decode for array
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable {
         guard let array: [Any?] = try optionalValue(forKeyPath: keyPath) else {
@@ -123,21 +102,11 @@ extension JSONDecoder {
         }
     }
 
-    func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidFragments: Bool) throws -> [T] where T: Decodable {
+    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable {
         guard let array: [T?] = try _decode(forKeyPath: keyPath) else {
             throw DecodeError.missingKeyPath(keyPath)
         }
-        return try array.flatMap {
-            guard let val = $0 else {
-                if allowInvalidFragments { return nil }
-                throw DecodeError.typeMissmatch(expected: T.self, actual: $0, keyPath: keyPath)
-            }
-            return val
-        }
-    }
-
-    func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable {
-        fatalError()
+        return array
     }
 }
 
@@ -165,7 +134,7 @@ private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {
             throw DecodeError.typeMissmatch(expected: JSONArray.self, actual: result, keyPath: keyPath)
         case (is JSONArray, .key):
             throw DecodeError.typeMissmatch(expected: JSONDictionary.self, actual: result, keyPath: keyPath)
-        case _ where result == nil:
+        case (nil, _):
             throw DecodeError.missingKeyPath(KeyPath(components: reached))
         case _ where !(result is T):
             throw DecodeError.typeMissmatch(

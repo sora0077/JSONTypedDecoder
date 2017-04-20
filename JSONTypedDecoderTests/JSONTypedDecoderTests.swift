@@ -135,7 +135,7 @@ class JSONTypedDecoderTests: XCTestCase {
         ]
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "array"
-        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidFragments: true), [1, 3])
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidElements: true), [1, 3])
     }
 
     func testArrayWithOptional() {
@@ -147,10 +147,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: [Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
-        } catch let DecodeError.typeMissmatch(expected, actual, keyPath) {
+        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
             XCTAssertEqual("\(expected)", "\(Int.self)")
             XCTAssert(actual == nil)
-            XCTAssertEqual(keyPath, "array")
+            XCTAssertEqual(missmatched, keyPath)
         } catch {
             XCTFail("\(error)")
         }
