@@ -20,7 +20,7 @@ public struct KeyPath {
         self.init(components: keys)
     }
     
-    fileprivate init(components: [Component]) {
+    init(components: [Component]) {
         self.components = components
     }
 }
@@ -29,6 +29,44 @@ public struct KeyPath {
 extension KeyPath: Sequence {
     public func makeIterator() -> IndexingIterator<[Component]> {
         return components.makeIterator()
+    }
+}
+
+extension KeyPath: BidirectionalCollection {
+    public var startIndex: Int { return components.startIndex }
+    public var endIndex: Int { return components.endIndex }
+    
+    public subscript(index: Int) -> Component {
+        return components[index]
+    }
+    
+    public func index(before i: Int) -> Int {
+        return components.index(before: i)
+    }
+    
+    public func index(after i: Int) -> Int {
+        return components.index(after: i)
+    }
+}
+
+extension KeyPath: CustomStringConvertible {
+    public var description: String {
+        var result: [String] = []
+        for key in self {
+            switch key {
+            case .key(let key):
+                result.append(key)
+            case .index(let index):
+                result.append("\(index)")
+            }
+        }
+        return result.joined(separator: ".")
+    }
+}
+
+extension KeyPath: Equatable {
+    public static func == (lhs: KeyPath, rhs: KeyPath) -> Bool {
+        return lhs.components == rhs.components
     }
 }
 
@@ -62,6 +100,15 @@ extension KeyPath {
 }
 
 // MARK: - extension KeyPath.Component
+extension KeyPath.Component: Equatable {
+    public static func == (lhs: KeyPath.Component, rhs: KeyPath.Component) -> Bool {
+        switch (lhs, rhs) {
+        case (.key(let lhs), .key(let rhs)): return lhs == rhs
+        case (.index(let lhs), .index(let rhs)): return lhs == rhs
+        default: return false
+        }
+    }
+}
 extension KeyPath.Component: ExpressibleByStringLiteral, ExpressibleByIntegerLiteral {
     public init(stringLiteral value: String) {
         self = .key(value)
