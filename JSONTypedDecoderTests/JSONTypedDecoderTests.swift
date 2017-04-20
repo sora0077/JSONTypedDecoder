@@ -14,17 +14,17 @@ extension String {
 }
 
 class JSONTypedDecoderTests: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -38,7 +38,7 @@ class JSONTypedDecoderTests: XCTestCase {
         XCTAssertEqual(try decoder.decode(forKeyPath: [1, "title"]), "one")
         XCTAssertEqual(try decoder.decode(forKeyPath: [0, "int"]), 0)
     }
-    
+
     func testMissing() {
         let data: Any = [
             ["title": "zero",
@@ -56,7 +56,7 @@ class JSONTypedDecoderTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testMissingInMidFlow() {
         let data: Any = [
             ["int": 0],
@@ -73,7 +73,7 @@ class JSONTypedDecoderTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testMissingInMidFlowWithOptional() {
         let data: Any = [
             ["int": 0],
@@ -83,7 +83,7 @@ class JSONTypedDecoderTests: XCTestCase {
         let keyPath: KeyPath = [1, "title", "val"]
         XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), String.nil)
     }
-    
+
     func testTypeMissmatched() {
         let data: Any = [
             ["title": 0]
@@ -101,7 +101,7 @@ class JSONTypedDecoderTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testTypeMissmatchedInMidFlow() {
         let data: Any = [
             ["title": 0]
@@ -119,7 +119,7 @@ class JSONTypedDecoderTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testArray() {
         let data: Any = [
             "array": [1, 2, 3]
@@ -128,7 +128,7 @@ class JSONTypedDecoderTests: XCTestCase {
         let keyPath: KeyPath = "array"
         XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), [1, 2, 3])
     }
-    
+
     func testArrayWithOptionalSafe() {
         let data: Any = [
             "array": [1, nil, 3]
@@ -137,7 +137,7 @@ class JSONTypedDecoderTests: XCTestCase {
         let keyPath: KeyPath = "array"
         XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidFragments: true), [1, 3])
     }
-    
+
     func testArrayWithOptional() {
         let data: Any = [
             "array": [1, nil, 3]
@@ -155,12 +155,12 @@ class JSONTypedDecoderTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
-    
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
 }

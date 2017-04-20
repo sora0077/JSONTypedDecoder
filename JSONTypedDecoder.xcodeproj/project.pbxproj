@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D140A8FBF5EFDF538C83685 /* Pods_JSONTypedDecoderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */; };
+		50F59E05A15F640FF63C3D07 /* Pods_JSONTypedDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8771970C2791EE86E8A75B52 /* Pods_JSONTypedDecoder.framework */; };
 		D988398B1EA8D1E9009C9A8B /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D988398A1EA8D1E9009C9A8B /* JSONDecoder.swift */; };
 		D98ED4771EA8A0EB00B7962A /* JSONTypedDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98ED46D1EA8A0EB00B7962A /* JSONTypedDecoder.framework */; };
 		D98ED47C1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ED47B1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift */; };
@@ -29,6 +31,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5BA5DFBE8832EFEA2820272F /* Pods-JSONTypedDecoder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoder.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoder/Pods-JSONTypedDecoder.release.xcconfig"; sourceTree = "<group>"; };
+		8771970C2791EE86E8A75B52 /* Pods_JSONTypedDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB68FC1AB258FEFC20AB0A3E /* Pods-JSONTypedDecoderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoderTests/Pods-JSONTypedDecoderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C2D65B7EAFCB24D600479F3F /* Pods-JSONTypedDecoderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoderTests/Pods-JSONTypedDecoderTests.release.xcconfig"; sourceTree = "<group>"; };
+		CCB24294063A4818B2AE9607 /* Pods-JSONTypedDecoder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoder/Pods-JSONTypedDecoder.debug.xcconfig"; sourceTree = "<group>"; };
 		D988398A1EA8D1E9009C9A8B /* JSONDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		D98ED46D1EA8A0EB00B7962A /* JSONTypedDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONTypedDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98ED4701EA8A0EB00B7962A /* JSONTypedDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONTypedDecoder.h; sourceTree = "<group>"; };
@@ -41,6 +48,7 @@
 		D98ED48C1EA8A5C400B7962A /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		D98ED48E1EA8AE6F00B7962A /* Decodable+StdLib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+StdLib.swift"; sourceTree = "<group>"; };
 		D98ED4901EA8AE9600B7962A /* Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decodable.swift; sourceTree = "<group>"; };
+		F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50F59E05A15F640FF63C3D07 /* Pods_JSONTypedDecoder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,18 +65,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				D98ED4771EA8A0EB00B7962A /* JSONTypedDecoder.framework in Frameworks */,
+				1D140A8FBF5EFDF538C83685 /* Pods_JSONTypedDecoderTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DE8F116F47DB9699AE12268 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8771970C2791EE86E8A75B52 /* Pods_JSONTypedDecoder.framework */,
+				F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		810CEF20D4B1C052DDB7E92A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CCB24294063A4818B2AE9607 /* Pods-JSONTypedDecoder.debug.xcconfig */,
+				5BA5DFBE8832EFEA2820272F /* Pods-JSONTypedDecoder.release.xcconfig */,
+				BB68FC1AB258FEFC20AB0A3E /* Pods-JSONTypedDecoderTests.debug.xcconfig */,
+				C2D65B7EAFCB24D600479F3F /* Pods-JSONTypedDecoderTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D98ED4631EA8A0EB00B7962A = {
 			isa = PBXGroup;
 			children = (
 				D98ED46F1EA8A0EB00B7962A /* JSONTypedDecoder */,
 				D98ED47A1EA8A0EB00B7962A /* JSONTypedDecoderTests */,
 				D98ED46E1EA8A0EB00B7962A /* Products */,
+				810CEF20D4B1C052DDB7E92A /* Pods */,
+				1DE8F116F47DB9699AE12268 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,10 +162,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D98ED4811EA8A0EB00B7962A /* Build configuration list for PBXNativeTarget "JSONTypedDecoder" */;
 			buildPhases = (
+				D9A5F19B1EA8F4D400A4D894 /* Run SwiftLint */,
+				D3B6EE780419DB1C66FA1110 /* [CP] Check Pods Manifest.lock */,
 				D98ED4681EA8A0EB00B7962A /* Sources */,
 				D98ED4691EA8A0EB00B7962A /* Frameworks */,
 				D98ED46A1EA8A0EB00B7962A /* Headers */,
 				D98ED46B1EA8A0EB00B7962A /* Resources */,
+				E858CD362ED69FA90BD3B38A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,9 +183,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D98ED4841EA8A0EB00B7962A /* Build configuration list for PBXNativeTarget "JSONTypedDecoderTests" */;
 			buildPhases = (
+				176B53306FA0DEFAD5E2FA59 /* [CP] Check Pods Manifest.lock */,
 				D98ED4721EA8A0EB00B7962A /* Sources */,
 				D98ED4731EA8A0EB00B7962A /* Frameworks */,
 				D98ED4741EA8A0EB00B7962A /* Resources */,
+				6BCCE23E915759774E904734 /* [CP] Embed Pods Frameworks */,
+				CE2145D772E4322CC30F95F0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -217,6 +255,98 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		176B53306FA0DEFAD5E2FA59 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6BCCE23E915759774E904734 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JSONTypedDecoderTests/Pods-JSONTypedDecoderTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE2145D772E4322CC30F95F0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JSONTypedDecoderTests/Pods-JSONTypedDecoderTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3B6EE780419DB1C66FA1110 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D9A5F19B1EA8F4D400A4D894 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d ${PODS_ROOT}/SwiftLint ]; then\n    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n    ${PODS_ROOT}/SwiftLint/swiftlint\nfi";
+		};
+		E858CD362ED69FA90BD3B38A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JSONTypedDecoder/Pods-JSONTypedDecoder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D98ED4681EA8A0EB00B7962A /* Sources */ = {
@@ -354,6 +484,7 @@
 		};
 		D98ED4821EA8A0EB00B7962A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCB24294063A4818B2AE9607 /* Pods-JSONTypedDecoder.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -374,6 +505,7 @@
 		};
 		D98ED4831EA8A0EB00B7962A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BA5DFBE8832EFEA2820272F /* Pods-JSONTypedDecoder.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -393,6 +525,7 @@
 		};
 		D98ED4851EA8A0EB00B7962A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB68FC1AB258FEFC20AB0A3E /* Pods-JSONTypedDecoderTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JSONTypedDecoderTests/Info.plist;
@@ -405,6 +538,7 @@
 		};
 		D98ED4861EA8A0EB00B7962A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2D65B7EAFCB24D600479F3F /* Pods-JSONTypedDecoderTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = JSONTypedDecoderTests/Info.plist;
