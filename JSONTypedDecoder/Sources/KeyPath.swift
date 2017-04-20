@@ -15,11 +15,11 @@ public struct KeyPath {
     }
     static let empty: KeyPath = []
     fileprivate let components: [Component]
-    
+
     public init(_ keys: Component...) {
         self.init(components: keys)
     }
-    
+
     init(components: [Component]) {
         self.components = components
     }
@@ -35,15 +35,15 @@ extension KeyPath: Sequence {
 extension KeyPath: BidirectionalCollection {
     public var startIndex: Int { return components.startIndex }
     public var endIndex: Int { return components.endIndex }
-    
+
     public subscript(index: Int) -> Component {
         return components[index]
     }
-    
+
     public func index(before i: Int) -> Int {
         return components.index(before: i)
     }
-    
+
     public func index(after i: Int) -> Int {
         return components.index(after: i)
     }
@@ -74,19 +74,19 @@ extension KeyPath: ExpressibleByStringLiteral, ExpressibleByIntegerLiteral, Expr
     public init(stringLiteral value: String) {
         self.init(components: [.key(value)])
     }
-    
+
     public init(unicodeScalarLiteral value: String) {
         self.init(stringLiteral: value)
     }
-    
+
     public init(extendedGraphemeClusterLiteral value: String) {
         self.init(stringLiteral: value)
     }
-    
+
     public init(integerLiteral value: Int) {
         self.init(components: [.index(value)])
     }
-    
+
     public init(arrayLiteral elements: KeyPath.Component...) {
         self.init(components: elements)
     }
@@ -113,15 +113,15 @@ extension KeyPath.Component: ExpressibleByStringLiteral, ExpressibleByIntegerLit
     public init(stringLiteral value: String) {
         self = .key(value)
     }
-    
+
     public init(unicodeScalarLiteral value: String) {
         self.init(stringLiteral: value)
     }
-    
+
     public init(extendedGraphemeClusterLiteral value: String) {
         self.init(stringLiteral: value)
     }
-    
+
     public init(integerLiteral value: Int) {
         self = .index(value)
     }
