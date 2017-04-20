@@ -26,7 +26,9 @@ extension Decoder {
             throw DecodeError.transformFailure(error, keyPath: keyPath)
         }
     }
+}
 
+extension Decoder {
     public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [R] where T: Decodable {
         return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
     }
@@ -70,6 +72,60 @@ extension Decoder {
 
     public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [R?]? where T: Decodable {
         let value: [T?]? = try decode(forKeyPath: keyPath)
+        return try value?.flatMap {
+            do {
+                return try $0.map(transform)
+            } catch {
+                throw DecodeError.transformFailure(error, keyPath: keyPath)
+            }
+        }
+    }
+}
+
+extension Decoder {
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
+        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
+    }
+
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
+        return try decode(forKeyPath: keyPath, allowInvalidElements: false, transform: transform)
+    }
+
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
+        let value: [String: T] = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        return try value.flatMap {
+            do {
+                return try transform($0)
+            } catch {
+                throw DecodeError.transformFailure(error, keyPath: keyPath)
+            }
+        }
+    }
+
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool, transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
+        let value: [String: T]? = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        return try value?.flatMap {
+            do {
+                return try transform($0)
+            } catch {
+                throw DecodeError.transformFailure(error, keyPath: keyPath)
+            }
+        }
+    }
+
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R?] where T: Decodable {
+        let value: [String: T?] = try decode(forKeyPath: keyPath)
+        return try value.map {
+            do {
+                return try $0.map(transform)
+            } catch {
+                throw DecodeError.transformFailure(error, keyPath: keyPath)
+            }
+        }
+    }
+
+    public func decode<T, R>(forKeyPath keyPath: KeyPath, transform: (T) throws -> R) throws -> [String: R?]? where T: Decodable {
+        let value: [String: T?]? = try decode(forKeyPath: keyPath)
         return try value?.flatMap {
             do {
                 return try $0.map(transform)

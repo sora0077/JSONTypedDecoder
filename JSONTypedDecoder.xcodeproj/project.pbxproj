@@ -22,6 +22,7 @@
 		D9A5F1AC1EA9202100A4D894 /* Decoder+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AB1EA9202100A4D894 /* Decoder+Array.swift */; };
 		D9A5F1AE1EA9206100A4D894 /* Decoder+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */; };
 		D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */; };
+		D9A5F1B21EA924E600A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F1B11EA924E600A4D894 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D9A5F1AB1EA9202100A4D894 /* Decoder+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Array.swift"; sourceTree = "<group>"; };
 		D9A5F1AD1EA9206100A4D894 /* Decoder+Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Dictionary.swift"; sourceTree = "<group>"; };
 		D9A5F1AF1EA920CF00A4D894 /* Decoder+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Transform.swift"; sourceTree = "<group>"; };
+		D9A5F1B11EA924E600A4D894 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JSONTypedDecoderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -147,6 +149,7 @@
 				D9A5F1A11EA91F6200A4D894 /* JSONDecoder */,
 				D98ED48A1EA8A4FC00B7962A /* Error.swift */,
 				D98ED48C1EA8A5C400B7962A /* KeyPath.swift */,
+				D9A5F1B11EA924E600A4D894 /* Utils.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				D9A5F1A31EA91F8400A4D894 /* JSONDecoder.swift in Sources */,
 				D9A5F1A01EA91F5800A4D894 /* Decoder.swift in Sources */,
 				D9A5F1A91EA91FCF00A4D894 /* Decodable.swift in Sources */,
+				D9A5F1B21EA924E600A4D894 /* Utils.swift in Sources */,
 				D9A5F1B01EA920CF00A4D894 /* Decoder+Transform.swift in Sources */,
 				D9A5F1AC1EA9202100A4D894 /* Decoder+Array.swift in Sources */,
 				D98ED48B1EA8A4FC00B7962A /* Error.swift in Sources */,

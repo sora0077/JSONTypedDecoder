@@ -55,10 +55,14 @@ struct JSONDecoder: Decoder {
         }
     }
     init(_ any: Any, rootKeyPath: KeyPath) throws {
-        guard let v: Any = try value(for: rootKeyPath, from: any) else {
-            throw DecodeError.missingKeyPath(rootKeyPath)
+        if rootKeyPath.isEmpty {
+            self.init(any)
+        } else {
+            guard let v: Any = try value(for: rootKeyPath, from: any) else {
+                throw DecodeError.missingKeyPath(rootKeyPath)
+            }
+            self.init(v)
         }
-        self.init(v)
     }
 
     fileprivate func optionalValue<T>(forKeyPath keyPath: KeyPath) throws -> T? {
