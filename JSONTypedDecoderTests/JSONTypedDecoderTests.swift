@@ -156,6 +156,48 @@ class JSONTypedDecoderTests: XCTestCase {
         }
     }
 
+    func testDictionary() {
+        let data: Any = [
+            "dictionary": [
+                "a": 1, "b": 2, "c": 3
+            ]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "dictionary"
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), ["a": 1, "b": 2, "c": 3])
+    }
+
+    func testDictionaryWithOptionalSafe() {
+        let data: Any = [
+            "dictionary": [
+                "a": 1, "b": nil, "c": 3
+            ]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "dictionary"
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidElements: true), ["a": 1, "c": 3])
+    }
+
+    func testDictionaryWithOptional() {
+        let data: Any = [
+            "dictionary": [
+                "a": 1, "b": nil, "c": 3
+            ]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "dictionary"
+        do {
+            let _: [String: Int] = try decoder.decode(forKeyPath: keyPath)
+            XCTFail()
+        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
+            XCTAssertEqual("\(expected)", "\(Int.self)")
+            XCTAssert(actual == nil)
+            XCTAssertEqual(missmatched, keyPath)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

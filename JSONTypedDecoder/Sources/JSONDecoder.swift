@@ -122,7 +122,7 @@ extension JSONDecoder {
                 if let value = value {
                     result[key] = try T.decode(JSONDecoder(value))
                 } else {
-                    result[key] = nil
+                    result.updateValue(nil, forKey: key)
                 }
             }
             return result
