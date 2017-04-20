@@ -24,6 +24,15 @@ class JSONTypedDecoderTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let data: Any = [
+            ["title": "zero",
+             "int": 0],
+            ["title": "one",
+             "int": 1]
+        ] as [[String: Any]]
+        let decoder = JSONDecoder(data)
+        XCTAssertEqual(try decoder.decode(forKeyPath: [1, "title"]), "one")
+        XCTAssertEqual(try decoder.decode(forKeyPath: [0, "int"]), 0)
     }
     
     func testPerformanceExample() {
