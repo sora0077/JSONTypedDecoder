@@ -58,14 +58,14 @@ struct JSONDecoder: Decoder {
         if rootKeyPath.isEmpty {
             self.init(any)
         } else {
-            guard let v: Any = try value(for: rootKeyPath, from: any) else {
+            guard let v = try value(for: rootKeyPath, from: any) else {
                 throw DecodeError.missingKeyPath(rootKeyPath)
             }
             self.init(v)
         }
     }
 
-    fileprivate func optionalValue<T>(forKeyPath keyPath: KeyPath) throws -> T? {
+    fileprivate func optionalValue(forKeyPath keyPath: KeyPath) throws -> Any? {
         return try optional(value(for: keyPath, from: rawValue), if: { (error) in
             switch error {
             case DecodeError.missingKeyPath(let missing) where keyPath == missing: return true
@@ -78,7 +78,7 @@ struct JSONDecoder: Decoder {
 /// decode for value
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
-        guard let v: T = try optionalValue(forKeyPath: keyPath) else {
+        guard let v = try optionalValue(forKeyPath: keyPath) else {
             return nil
         }
         do {
@@ -99,7 +99,7 @@ extension JSONDecoder {
 /// decode for array
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable {
-        guard let array: [Any?] = try optionalValue(forKeyPath: keyPath) else {
+        guard let array = try optionalValue(forKeyPath: keyPath) as? [Any?] else {
             return nil
         }
         do {
@@ -123,7 +123,7 @@ extension JSONDecoder {
 /// decode for dictionary
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable {
-        guard let dictionary: [String: Any?] = try optionalValue(forKeyPath: keyPath) else {
+        guard let dictionary = try optionalValue(forKeyPath: keyPath) as? [String: Any?] else {
             return nil
         }
         do {
@@ -153,7 +153,7 @@ private extension KeyPath.Component {
     }
 }
 
-private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {  // swiftlint:disable:this cyclomatic_complexity
+private func value(for keyPath: KeyPath, from json: Any) throws -> Any? {  // swiftlint:disable:this cyclomatic_complexity
     var result: Any? = json
     var reached: [KeyPath.Component] = []
     for key in keyPath {
@@ -161,28 +161,22 @@ private func value<T>(for keyPath: KeyPath, from json: Any) throws -> T? {  // s
         switch (result, key) {
         case (let dict as JSONDictionary, .key(let key)):
             result = dict[key]
-        case (let array as JSONArray, .index(let index)) where array.indices.contains(index):
-            result = array[index]
+        case (let array as JSONArray, .index(let index)):
+            result = array.indices.contains(index) ? array[index] : nil
         case (is JSONDictionary, .index):
             throw DecodeError.typeMissmatch(expected: JSONArray.self, actual: result, keyPath: keyPath)
         case (is JSONArray, .key):
             throw DecodeError.typeMissmatch(expected: JSONDictionary.self, actual: result, keyPath: keyPath)
         case (nil, _):
             throw DecodeError.missingKeyPath(KeyPath(components: reached))
-        case _ where !(result is T):
-            throw DecodeError.typeMissmatch(
-                expected: key.expectedType, actual: result, keyPath: KeyPath(components: reached + [key]))
-        default: break
+        default:
+            throw DecodeError.typeMissmatch(expected: key.expectedType, actual: result, keyPath: KeyPath(components: reached + [key]))
         }
     }
     switch result {
-    case is NSNull:
+    case is NSNull, nil:
         return nil
-    case nil:
-        return nil
-    case let value as T:
+    case let value?:
         return value
-    default:
-        throw DecodeError.typeMissmatch(expected: T.self, actual: result, keyPath: keyPath)
     }
 }

@@ -8,14 +8,38 @@
 
 import Foundation
 
+extension String: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> String {
+        return try castOrFail(decoder)
+    }
+}
+
 extension Int: Decodable {
     public static func decode(_ decoder: Decoder) throws -> Int {
         return try castOrFail(decoder)
     }
 }
 
-extension String: Decodable {
-    public static func decode(_ decoder: Decoder) throws -> String {
+extension UInt: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> UInt {
+        return try castOrFail(decoder)
+    }
+}
+
+extension Double: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> Double {
+        return try castOrFail(decoder)
+    }
+}
+
+extension Float: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> Float {
+        return try castOrFail(decoder)
+    }
+}
+
+extension Bool: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> Bool {
         return try castOrFail(decoder)
     }
 }

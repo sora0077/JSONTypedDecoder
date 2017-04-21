@@ -60,7 +60,7 @@ extension KeyPath: CustomStringConvertible {
                 result.append("\(index)")
             }
         }
-        return result.joined(separator: ".")
+        return "KeyPath(\(result.joined(separator: ".")))"
     }
 }
 

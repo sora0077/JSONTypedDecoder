@@ -13,6 +13,11 @@ extension String {
     static let `nil`: String? = .none
 }
 
+func json(_ object: Any) -> Data {
+    // swiftlint:disable force_try
+    return try! JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
+}
+
 public func XCTAssertEqual<T, U>(
     _ expression1: @autoclosure () throws -> [T : U?],
     _ expression2: @autoclosure () throws -> [T : U?],
@@ -49,20 +54,30 @@ class JSONTypedDecoderTests: XCTestCase {
         struct Test: Decodable {
             let a: Int
             let b: String
+            let c: NSNumber?
+            let d: Int8
 
             static func decode(_ decoder: Decoder) throws -> Test {
                 return try self.init(
                     a: decoder.decode(forKeyPath: "a"),
-                    b: decoder.decode(forKeyPath: "b"))
+                    b: decoder.decode(forKeyPath: "b"),
+                    c: decoder.decode(forKeyPath: "c"),
+                    d: decoder.decode(forKeyPath: "d"))
             }
         }
 
         let data: Any = [
-            "a": 1, "b": "test"
+            "a": 1, "b": "test", "c": 19, "d": 127
         ]
-        let test = try? decode(data) as Test
-        XCTAssertEqual(test?.a, 1)
-        XCTAssertEqual(test?.b, "test")
+        do {
+            let test = try decode(data) as Test
+            XCTAssertEqual(test.a, 1)
+            XCTAssertEqual(test.b, "test")
+            XCTAssertEqual(test.c, NSNumber(value: 19))
+            XCTAssertEqual(test.d, 127)
+        } catch {
+            XCTFail("\(error)")
+        }
     }
 
     func testNestedDecodable() {
