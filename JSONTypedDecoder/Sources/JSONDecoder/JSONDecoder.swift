@@ -78,7 +78,6 @@ struct JSONDecoder: Decoder {
 /// decode for value
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
-        print(rawValue)
         guard let v: T = try optionalValue(forKeyPath: keyPath) else {
             return nil
         }
@@ -128,15 +127,9 @@ extension JSONDecoder {
             return nil
         }
         do {
-            var result: [String: T?] = [:]
-            for (key, value) in dictionary {
-                if let value = value {
-                    result[key] = try T.decode(JSONDecoder(value))
-                } else {
-                    result.updateValue(nil, forKey: key)
-                }
+            return try dictionary.map {
+                try $0.map(JSONDecoder.init).map(T.decode)
             }
-            return result
         } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
             throw DecodeError.typeMissmatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
         }
