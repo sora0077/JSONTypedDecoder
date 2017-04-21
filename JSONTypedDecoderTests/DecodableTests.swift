@@ -19,7 +19,7 @@ extension Decodable {
     }
 }
 
-class DecodableTest: XCTestCase {
+class DecodableTests: XCTestCase {
 
     lazy var personJSON: JSONDictionary = {
         let gruopJSON: JSONDictionary = [ "name": "Himotoki", "floor": 12 ]
@@ -187,8 +187,8 @@ class DecodableTest: XCTestCase {
 
 }
 
-extension DecodableTest {
-    static var allTests: [(String, (DecodableTest) -> () throws -> Void)] {
+extension DecodableTests {
+    static var allTests: [(String, (DecodableTests) -> () throws -> Void)] {
         return [
             ("testPerson", testPerson),
             ("testPerformanceByPersons", testPerformanceByPersons),
