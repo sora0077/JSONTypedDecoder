@@ -10,15 +10,11 @@ import Foundation
 
 extension Dictionary {
     func map<T>(_ transform: (Value) throws -> T) rethrows -> [Key: T] {
-        var result: [Key: T] = [:]
-        for (key, value) in self {
-            result[key] = try transform(value)
-        }
-        return result
+        return try flatMap(transform)
     }
 
     func flatMap<T>(_ transform: (Value) throws -> T?) rethrows -> [Key: T] {
-        var result: [Key: T] = [:]
+        var result = [Key: T](minimumCapacity: count)
         for (key, value) in self {
             if let v = try transform(value) {
                 result[key] = v

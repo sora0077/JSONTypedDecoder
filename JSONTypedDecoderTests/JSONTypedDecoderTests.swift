@@ -13,6 +13,25 @@ extension String {
     static let `nil`: String? = .none
 }
 
+public func XCTAssertEqual<T, U>(
+    _ expression1: @autoclosure () throws -> [T : U?],
+    _ expression2: @autoclosure () throws -> [T : U?],
+    _ message: @autoclosure () -> String = "",
+    file: StaticString = #file,
+    line: UInt = #line)
+    where T : Hashable, U : Equatable {
+        do {
+            let (v1, v2) = try (expression1(), expression2())
+            XCTAssertEqual(v1.count, v2.count, message() + " Dictionary.count missmatch.", file: file, line: line)
+            let (looper, target) = v1.count > v2.count ? (v1, v2) : (v2, v1)
+            for (k, v) in looper {
+                XCTAssertEqual(v, target[k] ?? nil, message(), file: file, line: line)
+            }
+        } catch {
+            XCTFail(message() + " \(error)", file: file, line: line)
+        }
+}
+
 // swiftlint:disable nesting
 class JSONTypedDecoderTests: XCTestCase {
 
@@ -221,6 +240,17 @@ class JSONTypedDecoderTests: XCTestCase {
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "dictionary"
         XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidElements: true), ["a": 1, "c": 3])
+    }
+
+    func testDictionaryWithOptionalSafe2() {
+        let data: Any = [
+            "dictionary": [
+                "a": 1, "b": nil, "c": 3
+            ]
+        ]
+        let decoder = JSONDecoder(data)
+        let keyPath: KeyPath = "dictionary"
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), ["a": 1, "b": nil, "c": 3])
     }
 
     func testDictionaryWithOptional() {
