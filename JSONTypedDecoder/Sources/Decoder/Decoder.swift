@@ -25,3 +25,9 @@ extension Decoder {
         }
     }
 }
+
+extension Decoder {
+    public static func decode(_ e: Decoder) throws -> Decoder {
+        return e
+    }
+}

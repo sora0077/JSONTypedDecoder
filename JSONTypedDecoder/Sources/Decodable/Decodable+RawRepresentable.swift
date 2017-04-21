@@ -12,7 +12,7 @@ extension RawRepresentable where Self: Decodable, RawValue: Decodable {
     public static func decode(_ decoder: Decoder) throws -> Self {
         let rawValue = try RawValue.decode(decoder)
         guard let value = self.init(rawValue: rawValue) else {
-            throw DecodeError.typeMissmatch(expected: self, actual: rawValue, keyPath: .empty)
+            throw DecodeError.typeMismatch(expected: self, actual: rawValue, keyPath: .empty)
         }
         return value
     }

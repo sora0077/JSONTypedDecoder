@@ -10,6 +10,8 @@
 		1D140A8FBF5EFDF538C83685 /* Pods_JSONTypedDecoderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B100B7E4E119CC3531608B /* Pods_JSONTypedDecoderTests.framework */; };
 		50F59E05A15F640FF63C3D07 /* Pods_JSONTypedDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8771970C2791EE86E8A75B52 /* Pods_JSONTypedDecoder.framework */; };
 		D9114E201EA9CA8000447712 /* Decodable+NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9114E1F1EA9CA8000447712 /* Decodable+NSNumber.swift */; };
+		D9114E221EA9D85F00447712 /* DecodableTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9114E211EA9D85F00447712 /* DecodableTest.swift */; };
+		D9114E241EA9D86800447712 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9114E231EA9D86800447712 /* Utils.swift */; };
 		D98ED4771EA8A0EB00B7962A /* JSONTypedDecoder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98ED46D1EA8A0EB00B7962A /* JSONTypedDecoder.framework */; };
 		D98ED47C1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98ED47B1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift */; };
 		D98ED47E1EA8A0EB00B7962A /* JSONTypedDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = D98ED4701EA8A0EB00B7962A /* JSONTypedDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,6 +46,8 @@
 		C2D65B7EAFCB24D600479F3F /* Pods-JSONTypedDecoderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoderTests/Pods-JSONTypedDecoderTests.release.xcconfig"; sourceTree = "<group>"; };
 		CCB24294063A4818B2AE9607 /* Pods-JSONTypedDecoder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JSONTypedDecoder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JSONTypedDecoder/Pods-JSONTypedDecoder.debug.xcconfig"; sourceTree = "<group>"; };
 		D9114E1F1EA9CA8000447712 /* Decodable+NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+NSNumber.swift"; sourceTree = "<group>"; };
+		D9114E211EA9D85F00447712 /* DecodableTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableTest.swift; sourceTree = "<group>"; };
+		D9114E231EA9D86800447712 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D98ED46D1EA8A0EB00B7962A /* JSONTypedDecoder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONTypedDecoder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98ED4701EA8A0EB00B7962A /* JSONTypedDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONTypedDecoder.h; sourceTree = "<group>"; };
 		D98ED4711EA8A0EB00B7962A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 			children = (
 				D98ED47B1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift */,
 				D98ED47D1EA8A0EB00B7962A /* Info.plist */,
+				D9114E211EA9D85F00447712 /* DecodableTest.swift */,
+				D9114E231EA9D86800447712 /* Utils.swift */,
 			);
 			path = JSONTypedDecoderTests;
 			sourceTree = "<group>";
@@ -419,6 +425,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D98ED47C1EA8A0EB00B7962A /* JSONTypedDecoderTests.swift in Sources */,
+				D9114E221EA9D85F00447712 /* DecodableTest.swift in Sources */,
+				D9114E241EA9D86800447712 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
