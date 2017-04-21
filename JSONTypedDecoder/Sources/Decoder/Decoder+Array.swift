@@ -21,7 +21,7 @@ extension Decoder {
         return try (decode(forKeyPath: keyPath) as [T?]).flatMap {
             guard let val = $0 else {
                 if allowInvalidElements { return nil }
-                throw DecodeError.typeMissmatch(expected: T.self, actual: $0, keyPath: keyPath)
+                throw DecodeError.typeMismatch(expected: T.self, actual: $0, keyPath: keyPath)
             }
             return val
         }

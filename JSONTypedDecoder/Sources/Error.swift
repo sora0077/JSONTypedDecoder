@@ -10,6 +10,6 @@ import Foundation
 
 public enum DecodeError: Error {
     case missingKeyPath(KeyPath)
-    case typeMissmatch(expected: Any.Type, actual: Any?, keyPath: KeyPath)
+    case typeMismatch(expected: Any.Type, actual: Any?, keyPath: KeyPath)
     case transformFailure(Error, keyPath: KeyPath)
 }

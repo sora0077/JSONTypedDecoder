@@ -22,7 +22,7 @@ extension Decoder {
         return try dict.flatMap {
             guard let value = $0 else {
                 if allowInvalidElements { return nil }
-                throw DecodeError.typeMissmatch(expected: T.self, actual: $0, keyPath: keyPath)
+                throw DecodeError.typeMismatch(expected: T.self, actual: $0, keyPath: keyPath)
             }
             return value
         }

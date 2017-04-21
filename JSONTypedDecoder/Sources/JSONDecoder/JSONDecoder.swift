@@ -11,14 +11,6 @@ import Foundation
 private typealias JSONDictionary = [String: Any]
 private typealias JSONArray = [Any]
 
-func optional<T>(_ value: @autoclosure () throws -> T?, if cond: (Error) -> Bool) rethrows -> T? {
-    do {
-        return try value()
-    } catch let error where cond(error) {
-        return nil
-    }
-}
-
 struct JSONDecoder: Decoder {
     fileprivate enum Data {
         case dictionary(JSONDictionary)
@@ -59,6 +51,24 @@ struct JSONDecoder: Decoder {
         }
     }
 
+    func array() throws -> [Any] {
+        switch data {
+        case .array(let array):
+            return array
+        default:
+            throw DecodeError.typeMismatch(expected: JSONArray.self, actual: rawValue, keyPath: .empty)
+        }
+    }
+
+    func dictionary() throws -> [String: Any] {
+        switch data {
+        case .dictionary(let dictionary):
+            return dictionary
+        default:
+            throw DecodeError.typeMismatch(expected: JSONDictionary.self, actual: rawValue, keyPath: .empty)
+        }
+    }
+
     fileprivate func optionalValue(forKeyPath keyPath: KeyPath) throws -> Any? {
         return try optional(value(for: keyPath, from: rawValue), if: { (error) in
             switch error {
@@ -77,8 +87,8 @@ extension JSONDecoder {
         }
         do {
             return try T.decode(JSONDecoder(v))
-        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
-            throw DecodeError.typeMissmatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
         }
     }
 
@@ -101,8 +111,8 @@ extension JSONDecoder {
                 guard let v = $0 else { return nil }
                 return try T.decode(JSONDecoder(v))
             }
-        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
-            throw DecodeError.typeMissmatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
         }
     }
 
@@ -124,8 +134,8 @@ extension JSONDecoder {
             return try dictionary.map {
                 try $0.map(JSONDecoder.init).map(T.decode)
             }
-        } catch let DecodeError.typeMissmatch(expected, actual, missmatched) {
-            throw DecodeError.typeMissmatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
         }
     }
 
@@ -158,13 +168,13 @@ private func value(for keyPath: KeyPath, from json: Any) throws -> Any? {  // sw
         case (let array as JSONArray, .index(let index)):
             result = array.indices.contains(index) ? array[index] : nil
         case (is JSONDictionary, .index):
-            throw DecodeError.typeMissmatch(expected: JSONArray.self, actual: result, keyPath: keyPath)
+            throw DecodeError.typeMismatch(expected: JSONArray.self, actual: result, keyPath: keyPath)
         case (is JSONArray, .key):
-            throw DecodeError.typeMissmatch(expected: JSONDictionary.self, actual: result, keyPath: keyPath)
+            throw DecodeError.typeMismatch(expected: JSONDictionary.self, actual: result, keyPath: keyPath)
         case (nil, _):
             throw DecodeError.missingKeyPath(KeyPath(components: reached))
         default:
-            throw DecodeError.typeMissmatch(expected: key.expectedType, actual: result, keyPath: KeyPath(components: reached + [key]))
+            throw DecodeError.typeMismatch(expected: key.expectedType, actual: result, keyPath: KeyPath(components: reached + [key]))
         }
     }
     switch result {

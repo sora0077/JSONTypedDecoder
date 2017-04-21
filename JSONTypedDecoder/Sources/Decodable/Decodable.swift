@@ -18,7 +18,7 @@ func castOrFail<T>(_ decoder: Decoder) throws -> T {
 
 func castOrFail<T>(_ any: Any) throws -> T {
     guard let result = any as? T else {
-        throw DecodeError.typeMissmatch(expected: T.self, actual: any, keyPath: .empty)
+        throw DecodeError.typeMismatch(expected: T.self, actual: any, keyPath: .empty)
     }
     return result
 }
