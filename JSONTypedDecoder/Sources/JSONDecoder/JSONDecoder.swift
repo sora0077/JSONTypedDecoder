@@ -69,8 +69,8 @@ extension JSONDecoder {
         }
         do {
             return try T.decode(JSONDecoder(v))
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
         }
     }
 
@@ -100,8 +100,8 @@ extension JSONDecoder {
                 guard let v = $0 else { return nil }
                 return try T.decode(JSONDecoder(v))
             }
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
         }
     }
 
@@ -123,8 +123,8 @@ extension JSONDecoder {
             return try dictionary.map {
                 try $0.map(JSONDecoder.init).map(T.decode)
             }
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + missmatched)
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
+            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
         }
     }
 
