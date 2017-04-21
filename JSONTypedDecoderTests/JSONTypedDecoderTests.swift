@@ -144,10 +144,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: String = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             XCTAssertEqual("\(expected)", "\(String.self)")
             XCTAssertEqual(actual as? Int, 0)
-            XCTAssertEqual(missmatched, keyPath)
+            XCTAssertEqual(mismatched, keyPath)
         } catch {
             XCTFail("\(error)")
         }
@@ -162,10 +162,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: String = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             XCTAssertEqual("\(expected)", "\([String: Any].self)")
             XCTAssertEqual(actual as? Int, 0)
-            XCTAssertEqual(missmatched, [0, "title", "val"])
+            XCTAssertEqual(mismatched, [0, "title", "val"])
         } catch {
             XCTFail("\(error)")
         }
@@ -198,10 +198,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: [Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             XCTAssertEqual("\(expected)", "\(Int.self)")
             XCTAssert(actual == nil)
-            XCTAssertEqual(missmatched, keyPath)
+            XCTAssertEqual(mismatched, keyPath)
         } catch {
             XCTFail("\(error)")
         }
@@ -251,10 +251,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: [String: Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             XCTAssertEqual("\(expected)", "\(Int.self)")
             XCTAssert(actual == nil)
-            XCTAssertEqual(missmatched, keyPath)
+            XCTAssertEqual(mismatched, keyPath)
         } catch {
             XCTFail("\(error)")
         }
@@ -281,10 +281,10 @@ class JSONTypedDecoderTests: XCTestCase {
         do {
             let _: Test = try decode(data, rootKeyPath: "test")
             XCTFail()
-        } catch let DecodeError.typeMismatch(expected, actual, missmatched) {
+        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
             XCTAssertEqual("\(expected)", "\(Test.self)")
             XCTAssertEqual(actual as? Int, 1)
-            XCTAssert(missmatched.isEmpty)
+            XCTAssert(mismatched.isEmpty)
         } catch {
             XCTFail("\(error)")
         }
