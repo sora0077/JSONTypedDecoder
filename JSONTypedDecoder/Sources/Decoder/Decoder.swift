@@ -11,6 +11,7 @@ import Foundation
 public protocol Decoder {
     var rawValue: Any { get }
 
+    func decode(forKeyPath keyPath: KeyPath) throws -> Any
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
@@ -23,11 +24,5 @@ extension Decoder {
         } catch DecodeError.missingKeyPath {
             return nil
         }
-    }
-}
-
-extension Decoder {
-    public static func decode(_ e: Decoder) throws -> Decoder {
-        return e
     }
 }

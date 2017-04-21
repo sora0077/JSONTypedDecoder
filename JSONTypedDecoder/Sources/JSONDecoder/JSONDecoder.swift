@@ -98,6 +98,13 @@ extension JSONDecoder {
         }
         return value
     }
+
+    func decode(forKeyPath keyPath: KeyPath) throws -> Any {
+        guard let v = try optionalValue(forKeyPath: keyPath) else {
+            throw DecodeError.missingKeyPath(keyPath)
+        }
+        return v
+    }
 }
 
 /// decode for array

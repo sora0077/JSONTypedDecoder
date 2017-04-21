@@ -59,6 +59,11 @@ func <| <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> T {
 }
 
 /// - Throws: DecodeError or an arbitrary ErrorType
+func <| (decoder: Decoder, keyPath: KeyPath) throws -> Any {
+    return try decoder.decode(forKeyPath: keyPath)
+}
+
+/// - Throws: DecodeError or an arbitrary ErrorType
 func <|? <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> T? {
     return try decoder.decode(forKeyPath: keyPath)
 }

@@ -63,7 +63,7 @@ class DecodableTest: XCTestCase {
         XCTAssert(person?.float == 32.1)
         XCTAssert(person?.bool == true)
         XCTAssert(person?.number == NSNumber(value: 123456789))
-//        XCTAssert(person?.rawValue as? String == "RawValue")
+        XCTAssert(person?.rawValue as? String == "RawValue")
 
         XCTAssert(person?.nested == "The nested value")
         XCTAssert(person?.nestedDict["key"] == "The nested value")
@@ -209,7 +209,7 @@ struct Person: Decodable {
     let float: Float
     let bool: Bool
     let number: NSNumber
-//    let rawValue: Any
+    let rawValue: Any
 
     let nested: String
     let nestedDict: [String: String]
@@ -231,7 +231,7 @@ struct Person: Decodable {
             float: decoder <| "float",
             bool: decoder <| "bool",
             number: decoder <| "number",
-//            rawValue: (decoder <| "raw_value" as Decoder).rawValue,
+            rawValue: decoder <| "raw_value",
             nested: decoder <| [ "nested", "value" ],
             nestedDict: decoder <|-| [ "nested", "dict" ],
             array: decoder <|| "array",
