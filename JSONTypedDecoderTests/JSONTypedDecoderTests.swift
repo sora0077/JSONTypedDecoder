@@ -14,8 +14,15 @@ extension String {
 }
 
 func json(_ object: Any) -> Data {
-    // swiftlint:disable force_try
+    // swiftlint:disable:next force_try
     return try! JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
+}
+
+extension JSONDecoder {
+    init(_ any: Any) {
+        // swiftlint:disable:next force_try
+        try! self.init(any, rootKeyPath: .empty)
+    }
 }
 
 public func XCTAssertEqual<T, U>(
@@ -70,7 +77,7 @@ class JSONTypedDecoderTests: XCTestCase {
             "a": 1, "b": "test", "c": 19, "d": 127
         ]
         do {
-            let test = try decode(data) as Test
+            let test = try decode(json(data)) as Test
             XCTAssertEqual(test.a, 1)
             XCTAssertEqual(test.b, "test")
             XCTAssertEqual(test.c, NSNumber(value: 19))
@@ -96,7 +103,7 @@ class JSONTypedDecoderTests: XCTestCase {
             "root": ["a": 1, "b": "test"]
         ]
         do {
-            let test = try decode(data, rootKeyPath: "root") as Test
+            let test = try decode(json(data), rootKeyPath: "root") as Test
             XCTAssertEqual(test.a, 1)
             XCTAssertEqual(test.b, "test")
         } catch {
