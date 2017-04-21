@@ -37,35 +37,17 @@ struct JSONDecoder: Decoder {
             data = .value(any)
         }
     }
-    init(_ any: Any, rootKeyPath: KeyPath) throws {
-        switch any {
-        case let data as Foundation.Data:
+    init(_ any: Any, rootKeyPath: KeyPath?) throws {
+        switch (any, rootKeyPath) {
+        case (let data as Foundation.Data, _):
             try self.init(JSONSerialization.jsonObject(with: data, options: .allowFragments), rootKeyPath: rootKeyPath)
-        case _ where rootKeyPath.isEmpty:
-            self.init(any)
-        case _:
-            guard let v = try value(for: rootKeyPath, from: any) else {
-                throw DecodeError.missingKeyPath(rootKeyPath)
+        case (_, let keyPath?) where !keyPath.isEmpty:
+            guard let v = try value(for: keyPath, from: any) else {
+                throw DecodeError.missingKeyPath(keyPath)
             }
             self.init(v)
-        }
-    }
-
-    func array() throws -> [Any] {
-        switch data {
-        case .array(let array):
-            return array
         default:
-            throw DecodeError.typeMismatch(expected: JSONArray.self, actual: rawValue, keyPath: .empty)
-        }
-    }
-
-    func dictionary() throws -> [String: Any] {
-        switch data {
-        case .dictionary(let dictionary):
-            return dictionary
-        default:
-            throw DecodeError.typeMismatch(expected: JSONDictionary.self, actual: rawValue, keyPath: .empty)
+            self.init(any)
         }
     }
 
