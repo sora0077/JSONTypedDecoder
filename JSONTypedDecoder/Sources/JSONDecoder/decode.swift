@@ -9,6 +9,5 @@
 import Foundation
 
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> T where T: Decodable {
-    let decoder = try rootKeyPath.map { try JSONDecoder(any, rootKeyPath: $0) } ?? JSONDecoder(any)
-    return try T.decode(decoder)
+    return try T.decode(JSONDecoder(any, rootKeyPath: rootKeyPath ?? .empty))
 }

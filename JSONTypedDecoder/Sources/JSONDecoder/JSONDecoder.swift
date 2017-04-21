@@ -35,29 +35,23 @@ struct JSONDecoder: Decoder {
     }
     var rawValue: Any { return data.rawValue }
     private let data: Data
-    init(dictionary: [String: Any]) {
-        data = .dictionary(dictionary)
-    }
-    init(array: [Any]) {
-        data = .array(array)
-    }
-    private init(value: Any) {
-        data = .value(value)
-    }
-    init(_ any: Any) {
+    fileprivate init(_ any: Any) {
         switch any {
         case let dictionary as JSONDictionary:
-            self.init(dictionary: dictionary)
+            data = .dictionary(dictionary)
         case let array as JSONArray:
-            self.init(array: array)
+            data = .array(array)
         default:
-            self.init(value: any)
+            data = .value(any)
         }
     }
     init(_ any: Any, rootKeyPath: KeyPath) throws {
-        if rootKeyPath.isEmpty {
+        switch any {
+        case let data as Foundation.Data:
+            try self.init(JSONSerialization.jsonObject(with: data, options: .allowFragments), rootKeyPath: rootKeyPath)
+        case _ where rootKeyPath.isEmpty:
             self.init(any)
-        } else {
+        case _:
             guard let v = try value(for: rootKeyPath, from: any) else {
                 throw DecodeError.missingKeyPath(rootKeyPath)
             }
