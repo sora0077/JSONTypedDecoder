@@ -11,6 +11,7 @@ import Foundation
 public protocol Decoder {
     var rawValue: Any { get }
 
+    init(_ any: Any, rootKeyPath: KeyPath?) throws
     func decode(forKeyPath keyPath: KeyPath) throws -> Any
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
