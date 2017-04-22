@@ -1,5 +1,5 @@
 import XCTest
-@testable import JSONTypedDecoderTests
+@testable import Alter
 
 XCTMain([
      testCase(JSONTypedDecoderTests.allTests),
