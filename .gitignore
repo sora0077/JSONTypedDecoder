@@ -66,6 +66,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
-Development/vendor/bundle
+vendor/bundle
 
 /*.xcodeproj/
