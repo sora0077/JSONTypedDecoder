@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		93A3660FACF4EE25C6913C7D /* Pods_Alter_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00ECCA6FC9D83E5B5248968C /* Pods_Alter_macOSTests.framework */; };
-		BB5B964F414CACA9FD75C51D /* Pods_Alter_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506CDC315E59465E639C54A0 /* Pods_Alter_iOSTests.framework */; };
 		D9A5F1D91EAB26FD00A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F1D01EAB26FD00A4D894 /* Alter.framework */; };
 		D9A5F1E01EAB26FD00A4D894 /* Alter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A5F1D21EAB26FD00A4D894 /* Alter-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A5F2111EAB27E700A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F2081EAB27E700A4D894 /* Alter.framework */; };
@@ -126,7 +124,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A5F1D91EAB26FD00A4D894 /* Alter.framework in Frameworks */,
-				BB5B964F414CACA9FD75C51D /* Pods_Alter_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A5F2111EAB27E700A4D894 /* Alter.framework in Frameworks */,
-				93A3660FACF4EE25C6913C7D /* Pods_Alter_macOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,12 +351,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9A5F1E61EAB26FD00A4D894 /* Build configuration list for PBXNativeTarget "Alter-iOSTests" */;
 			buildPhases = (
-				96D9418302CB8022B53C595E /* [CP] Check Pods Manifest.lock */,
 				D9A5F1D41EAB26FD00A4D894 /* Sources */,
 				D9A5F1D51EAB26FD00A4D894 /* Frameworks */,
 				D9A5F1D61EAB26FD00A4D894 /* Resources */,
-				CA1C505B13E7D708D1800A1E /* [CP] Embed Pods Frameworks */,
-				E312C894D426AE7BB46C6B7B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -395,12 +388,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9A5F21C1EAB27E700A4D894 /* Build configuration list for PBXNativeTarget "Alter-macOSTests" */;
 			buildPhases = (
-				A77BBBA7D7ECFC7C30ED0576 /* [CP] Check Pods Manifest.lock */,
 				D9A5F20C1EAB27E700A4D894 /* Sources */,
 				D9A5F20D1EAB27E700A4D894 /* Frameworks */,
 				D9A5F20E1EAB27E700A4D894 /* Resources */,
-				1ACA45BC6B2DC098E3D124A0 /* [CP] Embed Pods Frameworks */,
-				1F83C6B1ABBA88D61809C624 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -492,81 +482,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1ACA45BC6B2DC098E3D124A0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alter-macOSTests/Pods-Alter-macOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		1F83C6B1ABBA88D61809C624 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alter-macOSTests/Pods-Alter-macOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		96D9418302CB8022B53C595E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		A77BBBA7D7ECFC7C30ED0576 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CA1C505B13E7D708D1800A1E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alter-iOSTests/Pods-Alter-iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D9A5F29F1EAB4B3300A4D894 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,21 +509,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [ -f ${PODS_ROOT}/SwiftLint/swiftlint ]; then\n    cd ../\n    ${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n    ${PODS_ROOT}/SwiftLint/swiftlint\nfi";
-		};
-		E312C894D426AE7BB46C6B7B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Alter-iOSTests/Pods-Alter-iOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -145,7 +145,18 @@ class AlterTests: XCTestCase {
             ] as [[String: Any]]
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = [1, "title", "val"]
-        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath), String.nil)
+
+        do {
+            let val: String? = try decoder.decode(forKeyPath: keyPath)
+            XCTAssertNil(val)
+            let arr: [String]? = try decoder.decode(forKeyPath: keyPath)
+            XCTAssertNil(arr)
+            let dic: [String: Int]? = try decoder.decode(forKeyPath: keyPath)
+            XCTAssertNil(dic)
+
+        } catch {
+            XCTFail("\(error)")
+        }
     }
 
     func testtypeMismatched() {
@@ -262,6 +273,8 @@ class AlterTests: XCTestCase {
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "dictionary"
         do {
+            let ret: [String: Int]? = try decoder.decode(forKeyPath: ["a"])
+            XCTAssertNil(ret)
             let _: [String: Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
         } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
