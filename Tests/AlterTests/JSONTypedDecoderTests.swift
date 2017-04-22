@@ -90,6 +90,19 @@ class AlterTests: XCTestCase {
         XCTAssertEqual(try decoder.decode(forKeyPath: [0, "int"]), 0)
     }
 
+    func testIntAsFamilyType() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let data: Any = [
+            ["int": 1 as UInt8,
+             "double": 1.1]
+            ] as [[String: Any]]
+        let decoder = JSONDecoder(data)
+        XCTAssertEqual(try decoder.decode(forKeyPath: [0, "int"]), 1)
+        XCTAssertEqual(try decoder.decode(forKeyPath: [0, "double"]), 1)
+        XCTAssertEqual(try decoder.decode(forKeyPath: [0, "double"]), 1.1)
+    }
+
     func testMissing() {
         let data: Any = [
             ["title": "zero",

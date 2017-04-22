@@ -10,12 +10,60 @@ import Foundation
 
 extension String: PrimitiveDecodable {}
 
-extension Int: PrimitiveDecodable {}
-
-extension UInt: PrimitiveDecodable {}
-
-extension Double: PrimitiveDecodable {}
-
-extension Float: PrimitiveDecodable {}
-
 extension Bool: PrimitiveDecodable {}
+
+extension Int: PrimitiveDecodable {
+    public static func decode(_ decoder: Decoder) throws -> Int {
+        do {
+            return try _decode(decoder)
+        } catch let error {
+            do {
+                return try NSNumber.decode(decoder).intValue
+            } catch _ {
+                throw error
+            }
+        }
+    }
+}
+
+extension UInt: PrimitiveDecodable {
+    public static func decode(_ decoder: Decoder) throws -> UInt {
+        do {
+            return try _decode(decoder)
+        } catch let error {
+            do {
+                return try NSNumber.decode(decoder).uintValue
+            } catch _ {
+                throw error
+            }
+        }
+    }
+}
+
+extension Double: PrimitiveDecodable {
+    public static func decode(_ decoder: Decoder) throws -> Double {
+        do {
+            return try _decode(decoder)
+        } catch let error {
+            do {
+                return try NSNumber.decode(decoder).doubleValue
+            } catch _ {
+                throw error
+            }
+        }
+    }
+}
+
+extension Float: PrimitiveDecodable {
+    public static func decode(_ decoder: Decoder) throws -> Float {
+        do {
+            return try _decode(decoder)
+        } catch let error {
+            do {
+                return try NSNumber.decode(decoder).floatValue
+            } catch _ {
+                throw error
+            }
+        }
+    }
+}
