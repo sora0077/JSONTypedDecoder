@@ -13,14 +13,14 @@ class NestedObjectParsingTests: XCTestCase {
 
     func testParseNestedObjectSuccess() {
         let JSON: JSONDictionary = [ "nested": [ "name": "Foo Bar" ] ]
-        let success = try? WithNestedObject.decodeValue(JSON)
+        let success = try? decode(JSON) as WithNestedObject
         XCTAssertNotNil(success)
         XCTAssertEqual(success?.nestedName, "Foo Bar")
     }
 
     func testParseNestedObjectFailure() {
         let JSON: JSONDictionary = [ "nested": "Foo Bar" ]
-        let failure = try? WithNestedObject.decodeValue(JSON)
+        let failure = try? decode(JSON) as WithNestedObject
         XCTAssertNil(failure)
     }
 }

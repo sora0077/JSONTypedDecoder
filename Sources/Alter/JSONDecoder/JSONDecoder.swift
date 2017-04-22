@@ -161,9 +161,9 @@ private func value(for keyPath: KeyPath, from json: Any) throws -> Any? {  // sw
         case (is JSONArray, .key):
             throw DecodeError.typeMismatch(expected: JSONDictionary.self, actual: result, keyPath: keyPath)
         case (nil, _):
-            throw DecodeError.missingKeyPath(KeyPath(components: reached))
+            throw DecodeError.missingKeyPath(KeyPath(reached))
         default:
-            throw DecodeError.typeMismatch(expected: key.expectedType, actual: result, keyPath: KeyPath(components: reached + [key]))
+            throw DecodeError.typeMismatch(expected: key.expectedType, actual: result, keyPath: KeyPath(reached + [key]))
         }
     }
     switch result {

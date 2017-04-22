@@ -13,3 +13,24 @@ public protocol Decodable {
 }
 
 public protocol PrimitiveDecodable: Decodable {}
+
+extension PrimitiveDecodable {
+    public static func decode(_ decoder: Decoder) throws -> Self {
+        return try _decode(decoder)
+    }
+
+    static func _decode(_ decoder: Decoder) throws -> Self {
+        return try castOrFail(decoder)
+    }
+}
+
+private func castOrFail<T>(_ decoder: Decoder) throws -> T {
+    return try castOrFail(decoder.rawValue)
+}
+
+private func castOrFail<T>(_ any: Any) throws -> T {
+    guard let result = any as? T else {
+        throw DecodeError.typeMismatch(expected: T.self, actual: any, keyPath: .empty)
+    }
+    return result
+}

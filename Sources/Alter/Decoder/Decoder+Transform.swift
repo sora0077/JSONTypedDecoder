@@ -31,9 +31,9 @@ extension Decoder {
 extension Decoder {
     public func decode<T, R>(
         forKeyPath keyPath: KeyPath,
-        allowInvalidElements: Bool = false,
+        skipInvalidElements: Bool = false,
         transform: (T) throws -> R) throws -> [R] where T: Decodable {
-        let value: [T] = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        let value: [T] = try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements)
         return try value.flatMap {
             do {
                 return try transform($0)
@@ -45,9 +45,9 @@ extension Decoder {
 
     public func decode<T, R>(
         forKeyPath keyPath: KeyPath,
-        allowInvalidElements: Bool = false,
+        skipInvalidElements: Bool = false,
         transform: (T) throws -> R) throws -> [R]? where T: Decodable {
-        let value: [T]? = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        let value: [T]? = try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements)
         return try value?.flatMap {
             do {
                 return try transform($0)
@@ -83,9 +83,9 @@ extension Decoder {
 extension Decoder {
     public func decode<T, R>(
         forKeyPath keyPath: KeyPath,
-        allowInvalidElements: Bool = false,
+        skipInvalidElements: Bool = false,
         transform: (T) throws -> R) throws -> [String: R] where T: Decodable {
-        let value: [String: T] = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        let value: [String: T] = try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements)
         return try value.flatMap {
             do {
                 return try transform($0)
@@ -97,9 +97,9 @@ extension Decoder {
 
     public func decode<T, R>(
         forKeyPath keyPath: KeyPath,
-        allowInvalidElements: Bool = false,
+        skipInvalidElements: Bool = false,
         transform: (T) throws -> R) throws -> [String: R]? where T: Decodable {
-        let value: [String: T]? = try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements)
+        let value: [String: T]? = try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements)
         return try value?.flatMap {
             do {
                 return try transform($0)

@@ -13,12 +13,6 @@ import Alter
 typealias JSONArray = [Any]
 typealias JSONDictionary = [String: Any]
 
-extension Decodable {
-    static func decodeValue(_ any: Any) throws -> Self {
-        return try Alter.decode(any)
-    }
-}
-
 class DecodableTests: XCTestCase {
 
     lazy var personJSON: JSONDictionary = {
@@ -53,7 +47,7 @@ class DecodableTests: XCTestCase {
         var JSON = personJSON
 
         // Succeeding case
-        let person = try? Person.decodeValue(JSON)
+        let person = try? decode(JSON) as Person
         XCTAssert(person != nil)
         XCTAssert(person?.firstName == "ABC")
         XCTAssert(person?.lastName == "DEF")
@@ -83,7 +77,7 @@ class DecodableTests: XCTestCase {
         do {
             JSON["bool"] = nil
             JSON["group"] = nil
-            _ = try Person.decodeValue(JSON)
+            _ = try decode(JSON) as Person
         } catch let DecodeError.missingKeyPath(keyPath) {
             XCTAssert(keyPath == "bool")
         } catch {
@@ -92,7 +86,7 @@ class DecodableTests: XCTestCase {
 
         do {
             JSON["age"] = "foo_bar"
-            _ = try Person.decodeValue(JSON)
+            _ = try decode(JSON) as Person
         } catch let DecodeError.typeMismatch(expected, actual, keyPath) {
             XCTAssertEqual(keyPath, "age")
             XCTAssertEqual(actual as? String, "foo_bar")
@@ -123,7 +117,7 @@ class DecodableTests: XCTestCase {
     func testGroup() {
         var JSON: JSONDictionary = [ "name": "Himotoki", "floor": 12 ]
 
-        let g = try? Group.decodeValue(JSON)
+        let g = try? decode(JSON) as Group
         XCTAssert(g != nil)
         XCTAssert(g?.name == "Himotoki")
         XCTAssert(g?.floor == 12)
@@ -131,7 +125,7 @@ class DecodableTests: XCTestCase {
 
         JSON["name"] = nil
         do {
-            _ = try Group.decodeValue(JSON)
+            _ = try decode(JSON) as Group
         } catch let DecodeError.missingKeyPath(keyPath) {
             XCTAssert(keyPath == "name")
         } catch {
@@ -171,7 +165,7 @@ class DecodableTests: XCTestCase {
             "uint64": NSNumber(value: UInt64.max)
             ]
 
-        let numbers = try? Numbers.decodeValue(JSON)
+        let numbers = try? decode(JSON) as Numbers
         XCTAssert(numbers != nil)
         XCTAssert(numbers?.int == Int.min)
         XCTAssert(numbers?.uint == UInt.max)
