@@ -50,6 +50,7 @@
 		D9A5F29C1EAB2AE500A4D894 /* KeyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2831EAB2AE500A4D894 /* KeyPath.swift */; };
 		D9A5F29D1EAB2AE500A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2841EAB2AE500A4D894 /* Utils.swift */; };
 		D9A5F29E1EAB2AE500A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2841EAB2AE500A4D894 /* Utils.swift */; };
+		D9A5F2A21EAB8A4E00A4D894 /* Decoder+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2A11EAB8A4E00A4D894 /* Decoder+Value.swift */; };
 		E224D200F156F7C65DA12E3E /* Pods_Alter_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71B85993B46DFF9CD49C0DA /* Pods_Alter_macOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,7 @@
 		D9A5F2821EAB2AE500A4D894 /* JSONDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		D9A5F2831EAB2AE500A4D894 /* KeyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPath.swift; sourceTree = "<group>"; };
 		D9A5F2841EAB2AE500A4D894 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		D9A5F2A11EAB8A4E00A4D894 /* Decoder+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Value.swift"; sourceTree = "<group>"; };
 		DE831E128EA05964CD66311A /* Pods_Alter_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alter_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -294,6 +296,7 @@
 		D9A5F27A1EAB2AE500A4D894 /* Decoder */ = {
 			isa = PBXGroup;
 			children = (
+				D9A5F2A11EAB8A4E00A4D894 /* Decoder+Value.swift */,
 				D9A5F27B1EAB2AE500A4D894 /* Decoder+Array.swift */,
 				D9A5F27C1EAB2AE500A4D894 /* Decoder+Dictionary.swift */,
 				D9A5F27D1EAB2AE500A4D894 /* Decoder+Transform.swift */,
@@ -686,6 +689,7 @@
 				D9A5F2971EAB2AE500A4D894 /* decode.swift in Sources */,
 				D9A5F2891EAB2AE500A4D894 /* Decodable+StdLib.swift in Sources */,
 				D9A5F2911EAB2AE500A4D894 /* Decoder+Transform.swift in Sources */,
+				D9A5F2A21EAB8A4E00A4D894 /* Decoder+Value.swift in Sources */,
 				D9A5F28B1EAB2AE500A4D894 /* Decodable.swift in Sources */,
 				D9A5F29D1EAB2AE500A4D894 /* Utils.swift in Sources */,
 				D9A5F2991EAB2AE500A4D894 /* JSONDecoder.swift in Sources */,
