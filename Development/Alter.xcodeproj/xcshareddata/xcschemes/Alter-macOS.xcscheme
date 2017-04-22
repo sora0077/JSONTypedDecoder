@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D9A5F2071EAB27E700A4D894"
-               BuildableName = "Alter-macOS.framework"
+               BuildableName = "Alter.framework"
                BlueprintName = "Alter-macOS"
                ReferencedContainer = "container:Alter.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9A5F2071EAB27E700A4D894"
-            BuildableName = "Alter-macOS.framework"
+            BuildableName = "Alter.framework"
             BlueprintName = "Alter-macOS"
             ReferencedContainer = "container:Alter.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9A5F2071EAB27E700A4D894"
-            BuildableName = "Alter-macOS.framework"
+            BuildableName = "Alter.framework"
             BlueprintName = "Alter-macOS"
             ReferencedContainer = "container:Alter.xcodeproj">
          </BuildableReference>
@@ -83,7 +83,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D9A5F2071EAB27E700A4D894"
-            BuildableName = "Alter-macOS.framework"
+            BuildableName = "Alter.framework"
             BlueprintName = "Alter-macOS"
             ReferencedContainer = "container:Alter.xcodeproj">
          </BuildableReference>
