@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		93A3660FACF4EE25C6913C7D /* Pods_Alter_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00ECCA6FC9D83E5B5248968C /* Pods_Alter_macOSTests.framework */; };
 		BB5B964F414CACA9FD75C51D /* Pods_Alter_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 506CDC315E59465E639C54A0 /* Pods_Alter_iOSTests.framework */; };
-		BBD365EE611341108058A7C2 /* Pods_Alter_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE831E128EA05964CD66311A /* Pods_Alter_iOS.framework */; };
 		D9A5F1D91EAB26FD00A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F1D01EAB26FD00A4D894 /* Alter.framework */; };
 		D9A5F1E01EAB26FD00A4D894 /* Alter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A5F1D21EAB26FD00A4D894 /* Alter-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A5F2111EAB27E700A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F2081EAB27E700A4D894 /* Alter.framework */; };
@@ -51,7 +50,6 @@
 		D9A5F29D1EAB2AE500A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2841EAB2AE500A4D894 /* Utils.swift */; };
 		D9A5F29E1EAB2AE500A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2841EAB2AE500A4D894 /* Utils.swift */; };
 		D9A5F2A21EAB8A4E00A4D894 /* Decoder+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2A11EAB8A4E00A4D894 /* Decoder+Value.swift */; };
-		E224D200F156F7C65DA12E3E /* Pods_Alter_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71B85993B46DFF9CD49C0DA /* Pods_Alter_macOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,7 +118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBD365EE611341108058A7C2 /* Pods_Alter_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +134,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E224D200F156F7C65DA12E3E /* Pods_Alter_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
