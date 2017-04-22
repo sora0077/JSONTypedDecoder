@@ -8,14 +8,6 @@
 
 import Foundation
 
-public protocol PrimitiveDecodable: Decodable {}
-
-extension PrimitiveDecodable {
-    public static func decode(_ decoder: Decoder) throws -> Self {
-        return try castOrFail(decoder)
-    }
-}
-
 extension String: PrimitiveDecodable {}
 
 extension Int: PrimitiveDecodable {}

@@ -12,7 +12,7 @@ private typealias JSONDictionary = [String: Any]
 private typealias JSONArray = [Any]
 
 struct JSONDecoder: Decoder {
-    fileprivate enum Data {
+    private enum Data {
         case dictionary(JSONDictionary)
         case array(JSONArray)
         case value(Any)
