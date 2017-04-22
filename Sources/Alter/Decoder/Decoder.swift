@@ -16,4 +16,8 @@ public protocol Decoder {
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
+
+    #if os(macOS)
+    func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable
+    #endif
 }

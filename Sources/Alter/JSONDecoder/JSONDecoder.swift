@@ -89,6 +89,18 @@ extension JSONDecoder {
     }
 }
 
+#if os(macOS)
+    extension JSONDecoder {
+        func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
+            do {
+                return try decode(forKeyPath: keyPath) as T
+            } catch DecodeError.missingKeyPath {
+                return nil
+            }
+        }
+    }
+#endif
+
 /// decode for array
 extension JSONDecoder {
     private func _decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?]? where T: Decodable {
