@@ -9,7 +9,7 @@
 import XCTest
 @testable import Alter
 
-// swiftlint:disable nesting
+// swiftlint:disable nesting type_body_length
 class AlterTests: XCTestCase {
 
     override func setUp() {

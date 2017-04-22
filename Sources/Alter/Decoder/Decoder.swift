@@ -17,21 +17,3 @@ public protocol Decoder {
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
 }
-
-extension Decoder {
-    public func decode(forKeyPath keyPath: KeyPath) throws -> Any? {
-        do {
-            return try decode(forKeyPath: keyPath) as Any
-        } catch DecodeError.missingKeyPath {
-            return nil
-        }
-    }
-
-    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
-        do {
-            return try decode(forKeyPath: keyPath) as T
-        } catch DecodeError.missingKeyPath {
-            return nil
-        }
-    }
-}
