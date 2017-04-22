@@ -1,13 +1,13 @@
 //
 //  NestedObjectParsingTests.swift
-//  JSONTypedDecoder
+//  Alter
 //
 //  Created by 林 達也 on 2017/04/21.
 //  Copyright © 2017年 sora0077. All rights reserved.
 //
 
 import XCTest
-import JSONTypedDecoder
+import Alter
 
 class NestedObjectParsingTests: XCTestCase {
 

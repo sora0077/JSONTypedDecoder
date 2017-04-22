@@ -1,16 +1,16 @@
 //
-//  JSONTypedDecoderTests.swift
-//  JSONTypedDecoderTests
+//  AlterTests.swift
+//  AlterTests
 //
 //  Created by 林 達也 on 2017/04/20.
 //  Copyright © 2017年 sora0077. All rights reserved.
 //
 
 import XCTest
-@testable import JSONTypedDecoder
+@testable import Alter
 
 // swiftlint:disable nesting
-class JSONTypedDecoderTests: XCTestCase {
+class AlterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
