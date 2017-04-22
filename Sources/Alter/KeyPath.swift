@@ -16,11 +16,11 @@ public struct KeyPath {
     static let empty: KeyPath = []
     fileprivate let components: [Component]
 
-    public init(_ keys: Component...) {
-        self.init(components: keys)
+    public init(_ components: Component...) {
+        self.init(components)
     }
 
-    init(components: [Component]) {
+    init(_ components: [Component]) {
         self.components = components
     }
 }
@@ -72,7 +72,7 @@ extension KeyPath: Equatable {
 
 extension KeyPath: ExpressibleByStringLiteral, ExpressibleByIntegerLiteral, ExpressibleByArrayLiteral {
     public init(stringLiteral value: String) {
-        self.init(components: [.key(value)])
+        self = [.key(value)]
     }
 
     public init(unicodeScalarLiteral value: String) {
@@ -84,18 +84,18 @@ extension KeyPath: ExpressibleByStringLiteral, ExpressibleByIntegerLiteral, Expr
     }
 
     public init(integerLiteral value: Int) {
-        self.init(components: [.index(value)])
+        self = [.index(value)]
     }
 
     public init(arrayLiteral elements: KeyPath.Component...) {
-        self.init(components: elements)
+        self.init(elements)
     }
 }
 
 // MARK: - internal extension KeyPath
 extension KeyPath {
     static func + (lhs: KeyPath, rhs: KeyPath) -> KeyPath {
-        return KeyPath(components: lhs.components + rhs.components)
+        return KeyPath(lhs.components + rhs.components)
     }
 }
 
