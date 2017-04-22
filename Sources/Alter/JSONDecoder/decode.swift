@@ -37,11 +37,11 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> [T?] wh
     }
 }
 
-public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, allowInvalidElements: Bool = false) throws -> [T] where T: Decodable {
+public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElements: Bool = false) throws -> [T] where T: Decodable {
     let array: [T?] = try decode(any, rootKeyPath: rootKeyPath)
     return try array.flatMap {
         guard let val = $0 else {
-            if allowInvalidElements { return nil }
+            if skipInvalidElements { return nil }
             throw DecodeError.typeMismatch(expected: T.self, actual: $0, keyPath: rootKeyPath ?? .empty)
         }
         return val
@@ -67,12 +67,12 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> [String
     }
 }
 
-public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, allowInvalidElements: Bool = false) throws -> [String: T]
+public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElements: Bool = false) throws -> [String: T]
     where T: Decodable {
     let dictionary: [String: T?] = try decode(any, rootKeyPath: rootKeyPath)
     return try dictionary.flatMap {
         guard let val = $0 else {
-            if allowInvalidElements { return nil }
+            if skipInvalidElements { return nil }
             throw DecodeError.typeMismatch(expected: T.self, actual: $0, keyPath: rootKeyPath ?? .empty)
         }
         return val

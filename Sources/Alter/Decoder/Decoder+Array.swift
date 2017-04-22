@@ -10,26 +10,26 @@ import Foundation
 
 extension Decoder {
     public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T] where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false)
+        return try decode(forKeyPath: keyPath, skipInvalidElements: false)
     }
 
     public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T]? where T: Decodable {
-        return try decode(forKeyPath: keyPath, allowInvalidElements: false)
+        return try decode(forKeyPath: keyPath, skipInvalidElements: false)
     }
 
-    public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T] where T: Decodable {
+    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool) throws -> [T] where T: Decodable {
         return try (decode(forKeyPath: keyPath) as [T?]).flatMap {
             guard let val = $0 else {
-                if allowInvalidElements { return nil }
+                if skipInvalidElements { return nil }
                 throw DecodeError.typeMismatch(expected: T.self, actual: $0, keyPath: keyPath)
             }
             return val
         }
     }
 
-    public func decode<T>(forKeyPath keyPath: KeyPath, allowInvalidElements: Bool) throws -> [T]? where T : Decodable {
+    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool) throws -> [T]? where T : Decodable {
         do {
-            return try decode(forKeyPath: keyPath, allowInvalidElements: allowInvalidElements) as [T]
+            return try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements) as [T]
         } catch DecodeError.missingKeyPath {
             return nil
         }

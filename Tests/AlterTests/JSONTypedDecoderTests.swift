@@ -186,7 +186,7 @@ class AlterTests: XCTestCase {
         ]
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "array"
-        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidElements: true), [1, 3])
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, skipInvalidElements: true), [1, 3])
     }
 
     func testArrayWithOptional() {
@@ -226,7 +226,7 @@ class AlterTests: XCTestCase {
         ]
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "dictionary"
-        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, allowInvalidElements: true), ["a": 1, "c": 3])
+        XCTAssertEqual(try decoder.decode(forKeyPath: keyPath, skipInvalidElements: true), ["a": 1, "c": 3])
     }
 
     func testDictionaryWithOptionalSafe2() {
