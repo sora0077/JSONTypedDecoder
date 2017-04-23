@@ -67,11 +67,7 @@ extension JSONDecoder {
         guard let v = try optionalValue(forKeyPath: keyPath) else {
             return nil
         }
-        do {
-            return try T.decode(JSONDecoder(v))
-        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
-        }
+        return try wrapError(for: keyPath, value: try T.decode(JSONDecoder(v)))
     }
 
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> T where T: Decodable {
@@ -95,14 +91,9 @@ extension JSONDecoder {
         guard let array = try optionalValue(forKeyPath: keyPath) as? [Any?] else {
             return nil
         }
-        do {
-            return try array.map {
-                guard let v = $0 else { return nil }
-                return try T.decode(JSONDecoder(v))
-            }
-        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
-        }
+        return try wrapError(for: keyPath, value: try array.map {
+            try $0.map(JSONDecoder.init).map(T.decode)
+        })
     }
 
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [T?] where T: Decodable {
@@ -119,13 +110,9 @@ extension JSONDecoder {
         guard let dictionary = try optionalValue(forKeyPath: keyPath) as? [String: Any?] else {
             return nil
         }
-        do {
-            return try dictionary.map {
-                try $0.map(JSONDecoder.init).map(T.decode)
-            }
-        } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
-            throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
-        }
+        return try wrapError(for: keyPath, value: try dictionary.map {
+            try $0.map(JSONDecoder.init).map(T.decode)
+        })
     }
 
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String : T?] where T : Decodable {
@@ -137,6 +124,14 @@ extension JSONDecoder {
 }
 
 // MARK: - util
+private func wrapError<T>(for keyPath: KeyPath, value: @autoclosure () throws -> T) throws -> T {
+    do {
+        return try value()
+    } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
+        throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
+    }
+}
+
 private extension KeyPath.Component {
     var expectedType: Any.Type {
         switch self {
