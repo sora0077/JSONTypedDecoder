@@ -315,12 +315,29 @@ class AlterTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
+}
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+extension AlterTests {
+    static var allTests: [(String, (AlterTests) -> () throws -> Void)] {
+        return [
+            ("testDecodable", testDecodable),
+            ("testNestedDecodable", testNestedDecodable),
+            ("testExample", testExample),
+            ("testIntAsFamilyType", testIntAsFamilyType),
+            ("testMissing", testMissing),
+            ("testMissingInMidFlow", testMissingInMidFlow),
+            ("testMissingInMidFlowWithOptional", testMissingInMidFlowWithOptional),
+            ("testtypeMismatched", testtypeMismatched),
+            ("testtypeMismatchedInMidFlow", testtypeMismatchedInMidFlow),
+            ("testArray", testArray),
+            ("testArrayWithOptionalSafe", testArrayWithOptionalSafe),
+            ("testArrayWithOptional", testArrayWithOptional),
+            ("testDictionary", testDictionary),
+            ("testDictionaryWithOptionalSafe", testDictionaryWithOptionalSafe),
+            ("testDictionaryWithOptionalSafe2", testDictionaryWithOptionalSafe2),
+            ("testDictionaryWithOptional", testDictionaryWithOptional),
+            ("testEnum", testEnum),
+            ("testEnumFailure", testEnumFailure)
+        ]
     }
-
 }
