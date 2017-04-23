@@ -163,7 +163,7 @@ class DecodableTests: XCTestCase {
             "uint32": NSNumber(value: UInt32.max),
             "int64": NSNumber(value: Int64.min),
             "uint64": NSNumber(value: UInt64.max)
-            ]
+        ]
 
         let numbers = try? decode(JSON) as Numbers
         XCTAssert(numbers != nil)
@@ -179,6 +179,35 @@ class DecodableTests: XCTestCase {
         XCTAssert(numbers?.uint64 == UInt64.max)
     }
 
+    func testPeformanceByNumbers() {
+        let JSON: JSONDictionary = [
+            "int": Int.min,
+            "uint": UInt.max,
+            "int8": NSNumber(value: Int8.min),
+            "uint8": NSNumber(value: UInt8.max),
+            "int16": NSNumber(value: Int16.min),
+            "uint16": NSNumber(value: UInt16.max),
+            "int32": NSNumber(value: Int32.min),
+            "uint32": NSNumber(value: UInt32.max),
+            "int64": NSNumber(value: Int64.min),
+            "uint64": NSNumber(value: UInt64.max)
+        ]
+        #if _runtime(_ObjC)
+            // Intentionally bridged to `NSArray` for the performance test. That
+            // should match return values from `JSONSerialization`.
+            let JSONList: Any = Array(NSArray(array: Array(repeating: JSON, count: 500)))
+        #else
+            let JSONList: Any = Array(repeating: JSON, count: 500)
+        #endif
+
+        measure {
+            do {
+                _ = try decode(JSONList) as [Numbers]
+            } catch {
+                XCTFail("\(error)")
+            }
+        }
+    }
 }
 
 extension DecodableTests {
@@ -189,7 +218,8 @@ extension DecodableTests {
             ("testGroup", testGroup),
             ("testDecodeArray", testDecodeArray),
             ("testDecodeDictionary", testDecodeDictionary),
-            ("testDecodeNumbers", testDecodeNumbers)
+            ("testDecodeNumbers", testDecodeNumbers),
+            ("testPeformanceByNumbers", testPeformanceByNumbers)
         ]
     }
 }

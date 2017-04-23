@@ -8,9 +8,17 @@
 
 import Foundation
 
-extension String: PrimitiveDecodable {}
+extension String: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> String {
+        return try _decode(decoder)
+    }
+}
 
-extension Bool: PrimitiveDecodable {}
+extension Bool: Decodable {
+    public static func decode(_ decoder: Decoder) throws -> Bool {
+        return try _decode(decoder)
+    }
+}
 
 extension Int: PrimitiveDecodable {
     public static func decode(_ decoder: Decoder) throws -> Int {
@@ -23,6 +31,10 @@ extension Int: PrimitiveDecodable {
                 throw error
             }
         }
+    }
+
+    public static func decode(from number: NSNumber) -> Int {
+        return number.intValue
     }
 }
 
@@ -38,9 +50,13 @@ extension UInt: PrimitiveDecodable {
             }
         }
     }
+
+    public static func decode(from number: NSNumber) -> UInt {
+        return number.uintValue
+    }
 }
 
-extension Double: PrimitiveDecodable {
+extension Double: Decodable {
     public static func decode(_ decoder: Decoder) throws -> Double {
         do {
             return try _decode(decoder)
@@ -54,7 +70,7 @@ extension Double: PrimitiveDecodable {
     }
 }
 
-extension Float: PrimitiveDecodable {
+extension Float: Decodable {
     public static func decode(_ decoder: Decoder) throws -> Float {
         do {
             return try _decode(decoder)
