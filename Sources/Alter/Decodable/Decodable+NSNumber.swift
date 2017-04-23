@@ -25,7 +25,11 @@ extension PrimitiveDecodable {
 
 extension NSNumber: Decodable {
     public static func decode(_ decoder: Decoder) throws -> Self {
-        return try _decode(decoder)
+        #if !os(Linux)
+            return try _decode(decoder)
+        #else
+            return try castOrFail(decoder)
+        #endif
     }
 }
 
