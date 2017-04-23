@@ -8,6 +8,20 @@
 
 import Foundation
 
+private extension PrimitiveDecodable {
+    static func decodeAndTryNSNumber(_ decoder: Decoder) throws -> Self {
+        do {
+            return try _decode(decoder)
+        } catch let error {
+            do {
+                return try decode(from: NSNumber.decode(decoder))
+            } catch _ {
+                throw error
+            }
+        }
+    }
+}
+
 extension String: Decodable {
     public static func decode(_ decoder: Decoder) throws -> String {
         return try _decode(decoder)
@@ -22,15 +36,7 @@ extension Bool: Decodable {
 
 extension Int: PrimitiveDecodable {
     public static func decode(_ decoder: Decoder) throws -> Int {
-        do {
-            return try _decode(decoder)
-        } catch let error {
-            do {
-                return try NSNumber.decode(decoder).intValue
-            } catch _ {
-                throw error
-            }
-        }
+        return try decodeAndTryNSNumber(decoder)
     }
 
     public static func decode(from number: NSNumber) -> Int {
@@ -40,15 +46,7 @@ extension Int: PrimitiveDecodable {
 
 extension UInt: PrimitiveDecodable {
     public static func decode(_ decoder: Decoder) throws -> UInt {
-        do {
-            return try _decode(decoder)
-        } catch let error {
-            do {
-                return try NSNumber.decode(decoder).uintValue
-            } catch _ {
-                throw error
-            }
-        }
+        return try decodeAndTryNSNumber(decoder)
     }
 
     public static func decode(from number: NSNumber) -> UInt {
