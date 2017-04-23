@@ -52,12 +52,12 @@ struct JSONDecoder: Decoder {
     }
 
     fileprivate func optionalValue(forKeyPath keyPath: KeyPath) throws -> Any? {
-        return try optional(value(for: keyPath, from: rawValue), if: { (error) in
+        return try optional(value(for: keyPath, from: rawValue)) { (error) in
             switch error {
-            case DecodeError.missingKeyPath(let missing) where keyPath == missing: return true
+            case .missingKeyPath(let missing) where keyPath == missing: return true
             default: return false
             }
-        })
+        }
     }
 }
 
@@ -88,18 +88,6 @@ extension JSONDecoder {
         return v
     }
 }
-
-#if os(macOS)
-    extension JSONDecoder {
-        func decode<T>(forKeyPath keyPath: KeyPath) throws -> T? where T: Decodable {
-            do {
-                return try decode(forKeyPath: keyPath) as T
-            } catch DecodeError.missingKeyPath {
-                return nil
-            }
-        }
-    }
-#endif
 
 /// decode for array
 extension JSONDecoder {

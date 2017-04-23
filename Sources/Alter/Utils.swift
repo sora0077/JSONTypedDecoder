@@ -23,11 +23,3 @@ extension Dictionary {
         return result
     }
 }
-
-func optional<T>(_ value: @autoclosure () throws -> T?, if cond: (Error) -> Bool) rethrows -> T? {
-    do {
-        return try value()
-    } catch let error where cond(error) {
-        return nil
-    }
-}

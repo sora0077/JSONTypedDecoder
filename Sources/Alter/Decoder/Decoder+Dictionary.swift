@@ -19,20 +19,4 @@ extension Decoder {
             return value
         }
     }
-
-    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool = false) throws -> [String: T]? where T: Decodable {
-        do {
-            return try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements) as [String: T]
-        } catch DecodeError.missingKeyPath {
-            return nil
-        }
-    }
-
-    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?]? where T: Decodable {
-        do {
-            return try decode(forKeyPath: keyPath) as [String: T?]
-        } catch DecodeError.missingKeyPath {
-            return nil
-        }
-    }
 }
