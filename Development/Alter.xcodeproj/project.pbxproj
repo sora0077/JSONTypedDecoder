@@ -15,8 +15,8 @@
 		D9A5F2681EAB2AC200A4D894 /* DecodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2611EAB2AC200A4D894 /* DecodableTests.swift */; };
 		D9A5F2691EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2621EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift */; };
 		D9A5F26A1EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2621EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift */; };
-		D9A5F26B1EAB2AC200A4D894 /* JSONTypedDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2631EAB2AC200A4D894 /* JSONTypedDecoderTests.swift */; };
-		D9A5F26C1EAB2AC200A4D894 /* JSONTypedDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2631EAB2AC200A4D894 /* JSONTypedDecoderTests.swift */; };
+		D9A5F26B1EAB2AC200A4D894 /* AlterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2631EAB2AC200A4D894 /* AlterTests.swift */; };
+		D9A5F26C1EAB2AC200A4D894 /* AlterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2631EAB2AC200A4D894 /* AlterTests.swift */; };
 		D9A5F26D1EAB2AC200A4D894 /* NestedObjectParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2641EAB2AC200A4D894 /* NestedObjectParsingTests.swift */; };
 		D9A5F26E1EAB2AC200A4D894 /* NestedObjectParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2641EAB2AC200A4D894 /* NestedObjectParsingTests.swift */; };
 		D9A5F26F1EAB2AC200A4D894 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A5F2651EAB2AC200A4D894 /* Utils.swift */; };
@@ -91,7 +91,7 @@
 		D9A5F2171EAB27E700A4D894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9A5F2611EAB2AC200A4D894 /* DecodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableTests.swift; sourceTree = "<group>"; };
 		D9A5F2621EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodeWithRootKeyPathTests.swift; sourceTree = "<group>"; };
-		D9A5F2631EAB2AC200A4D894 /* JSONTypedDecoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTypedDecoderTests.swift; sourceTree = "<group>"; };
+		D9A5F2631EAB2AC200A4D894 /* AlterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlterTests.swift; sourceTree = "<group>"; };
 		D9A5F2641EAB2AC200A4D894 /* NestedObjectParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestedObjectParsingTests.swift; sourceTree = "<group>"; };
 		D9A5F2651EAB2AC200A4D894 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D9A5F2761EAB2AE500A4D894 /* Decodable+NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decodable+NSNumber.swift"; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 			children = (
 				D9A5F2611EAB2AC200A4D894 /* DecodableTests.swift */,
 				D9A5F2621EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift */,
-				D9A5F2631EAB2AC200A4D894 /* JSONTypedDecoderTests.swift */,
+				D9A5F2631EAB2AC200A4D894 /* AlterTests.swift */,
 				D9A5F2641EAB2AC200A4D894 /* NestedObjectParsingTests.swift */,
 				D9A5F2651EAB2AC200A4D894 /* Utils.swift */,
 			);
@@ -539,7 +539,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A5F26F1EAB2AC200A4D894 /* Utils.swift in Sources */,
-				D9A5F26B1EAB2AC200A4D894 /* JSONTypedDecoderTests.swift in Sources */,
+				D9A5F26B1EAB2AC200A4D894 /* AlterTests.swift in Sources */,
 				D9A5F2691EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift in Sources */,
 				D9A5F26D1EAB2AC200A4D894 /* NestedObjectParsingTests.swift in Sources */,
 				D9A5F2671EAB2AC200A4D894 /* DecodableTests.swift in Sources */,
@@ -571,7 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A5F2701EAB2AC200A4D894 /* Utils.swift in Sources */,
-				D9A5F26C1EAB2AC200A4D894 /* JSONTypedDecoderTests.swift in Sources */,
+				D9A5F26C1EAB2AC200A4D894 /* AlterTests.swift in Sources */,
 				D9A5F26A1EAB2AC200A4D894 /* DecodeWithRootKeyPathTests.swift in Sources */,
 				D9A5F26E1EAB2AC200A4D894 /* NestedObjectParsingTests.swift in Sources */,
 				D9A5F2681EAB2AC200A4D894 /* DecodableTests.swift in Sources */,

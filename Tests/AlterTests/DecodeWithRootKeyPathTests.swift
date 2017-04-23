@@ -9,7 +9,7 @@
 import XCTest
 import Alter
 
-class DecodeWithRootKeyPathTest: XCTestCase {
+class DecodeWithRootKeyPathTests: XCTestCase {
 
     lazy var JSON: JSONDictionary = {
         return [
@@ -60,8 +60,8 @@ class DecodeWithRootKeyPathTest: XCTestCase {
     }
 }
 
-extension DecodeWithRootKeyPathTest {
-    static var allTests: [(String, (DecodeWithRootKeyPathTest) -> () throws -> Void)] {
+extension DecodeWithRootKeyPathTests {
+    static var allTests: [(String, (DecodeWithRootKeyPathTests) -> () throws -> Void)] {
         return [
             ("testDecodeWithRootKeyValue", testDecodeWithRootKeyValue),
             ("testDecodeWithRootKeyArray", testDecodeWithRootKeyArray),
