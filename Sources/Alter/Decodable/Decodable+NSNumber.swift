@@ -8,12 +8,29 @@
 
 import Foundation
 
+#if os(Linux)
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+#endif
+
 extension NSNumber: PrimitiveDecodable {
+    #if os(Linux)
+    private static func conv<T>(linux number: NSNumber) -> T {
+        return number as! T  // swiftlint:disable:this force_cast
+    }
+    #endif
+
     public static func decode(_ decoder: Decoder) throws -> Self {
         #if !os(Linux)
             return try _decode(decoder)
         #else
-            return try castOrFail(decoder)
+            guard let number = formatter.number(from: "\(decoder.rawValue)") else {
+                throw DecodeError.typeMismatch(expected: self, actual: decoder.rawValue, keyPath: .empty)
+            }
+            return conv(linux: number)
         #endif
     }
 }
@@ -62,6 +79,13 @@ extension Int64: PrimitiveDecodable {
 
 extension UInt64: PrimitiveDecodable {
     public static func decode(_ decoder: Decoder) throws -> UInt64 {
-        return try NSNumber.decode(decoder).uint64Value
+        #if os(Linux)
+            guard let int = UInt64("\(decoder.rawValue)", radix: 10) else {
+                throw DecodeError.typeMismatch(expected: UInt64.self, actual: decoder.rawValue, keyPath: .empty)
+            }
+            return int
+        #else
+            return try NSNumber.decode(decoder).uint64Value
+        #endif
     }
 }

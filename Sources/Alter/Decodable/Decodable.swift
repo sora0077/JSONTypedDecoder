@@ -24,15 +24,9 @@ extension PrimitiveDecodable {
     }
 }
 
-#if !os(Linux)
-    private func castOrFail<T>(_ decoder: Decoder) throws -> T {
-        return try castOrFail(decoder.rawValue)
-    }
-#else
-    func castOrFail<T>(_ decoder: Decoder) throws -> T {
-        return try castOrFail(decoder.rawValue)
-    }
-#endif
+private func castOrFail<T>(_ decoder: Decoder) throws -> T {
+    return try castOrFail(decoder.rawValue)
+}
 
 private func castOrFail<T>(_ any: Any) throws -> T {
     guard let result = any as? T else {
