@@ -9,15 +9,7 @@
 import Foundation
 
 extension Decoder {
-    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T] where T: Decodable {
-        return try decode(forKeyPath: keyPath, skipInvalidElements: false)
-    }
-
-    public func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T]? where T: Decodable {
-        return try decode(forKeyPath: keyPath, skipInvalidElements: false)
-    }
-
-    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool) throws -> [String: T] where T: Decodable {
+    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool = false) throws -> [String: T] where T: Decodable {
         let dict: [String: T?] = try decode(forKeyPath: keyPath)
         return try dict.flatMap {
             guard let value = $0 else {
@@ -28,7 +20,7 @@ extension Decoder {
         }
     }
 
-    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool) throws -> [String: T]? where T: Decodable {
+    public func decode<T>(forKeyPath keyPath: KeyPath, skipInvalidElements: Bool = false) throws -> [String: T]? where T: Decodable {
         do {
             return try decode(forKeyPath: keyPath, skipInvalidElements: skipInvalidElements) as [String: T]
         } catch DecodeError.missingKeyPath {
