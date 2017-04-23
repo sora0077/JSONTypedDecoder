@@ -159,13 +159,12 @@ class AlterTests: XCTestCase {
         let keyPath: KeyPath = [1, "title", "val"]
 
         do {
-            let val: String? = try decoder.decode(forKeyPath: keyPath)
+            let val: String? = try optional(decoder.decode(forKeyPath: keyPath))
             XCTAssertNil(val)
-            let arr: [String]? = try decoder.decode(forKeyPath: keyPath)
+            let arr: [String]? = try optional(decoder.decode(forKeyPath: keyPath))
             XCTAssertNil(arr)
-            let dic: [String: Int]? = try decoder.decode(forKeyPath: keyPath)
+            let dic: [String: Int]? = try optional(decoder.decode(forKeyPath: keyPath))
             XCTAssertNil(dic)
-
         } catch {
             XCTFail("\(error)")
         }
@@ -285,7 +284,7 @@ class AlterTests: XCTestCase {
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "dictionary"
         do {
-            let ret: [String: Int]? = try decoder.decode(forKeyPath: ["a"])
+            let ret: [String: Int]? = try optional(decoder.decode(forKeyPath: ["a"]))
             XCTAssertNil(ret)
             let _: [String: Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
