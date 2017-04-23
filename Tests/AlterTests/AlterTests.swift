@@ -26,15 +26,23 @@ class AlterTests: XCTestCase {
         struct Test: Decodable {
             let a: Int
             let b: String
+            #if !os(Linux)
             let c: NSNumber?
             let d: Int8
+            #endif
 
             static func decode(_ decoder: Decoder) throws -> Test {
-                return try self.init(
-                    a: decoder.decode(forKeyPath: "a"),
-                    b: decoder.decode(forKeyPath: "b"),
-                    c: decoder.decode(forKeyPath: "c"),
-                    d: decoder.decode(forKeyPath: "d"))
+                #if !os(Linux)
+                    return try self.init(
+                        a: decoder.decode(forKeyPath: "a"),
+                        b: decoder.decode(forKeyPath: "b"),
+                        c: decoder.decode(forKeyPath: "c"),
+                        d: decoder.decode(forKeyPath: "d"))
+                #else
+                    return try self.init(
+                        a: decoder.decode(forKeyPath: "a"),
+                        b: decoder.decode(forKeyPath: "b"))
+                #endif
             }
         }
 
@@ -45,8 +53,10 @@ class AlterTests: XCTestCase {
             let test = try decode(json(data)) as Test
             XCTAssertEqual(test.a, 1)
             XCTAssertEqual(test.b, "test")
+            #if !os(Linux)
             XCTAssertEqual(test.c, NSNumber(value: 19))
             XCTAssertEqual(test.d, 127)
+            #endif
         } catch {
             XCTFail("\(error)")
         }
@@ -98,8 +108,10 @@ class AlterTests: XCTestCase {
              "double": 1.1]
             ] as [[String: Any]]
         let decoder = JSONDecoder(data)
+        #if !os(Linux)
         XCTAssertEqual(try decoder.decode(forKeyPath: [0, "int"]), 1)
         XCTAssertEqual(try decoder.decode(forKeyPath: [0, "double"]), 1)
+        #endif
         XCTAssertEqual(try decoder.decode(forKeyPath: [0, "double"]), 1.1)
     }
 
@@ -315,12 +327,29 @@ class AlterTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
+}
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+extension AlterTests {
+    static var allTests: [(String, (AlterTests) -> () throws -> Void)] {
+        return [
+            ("testDecodable", testDecodable),
+            ("testNestedDecodable", testNestedDecodable),
+            ("testExample", testExample),
+            ("testIntAsFamilyType", testIntAsFamilyType),
+            ("testMissing", testMissing),
+            ("testMissingInMidFlow", testMissingInMidFlow),
+            ("testMissingInMidFlowWithOptional", testMissingInMidFlowWithOptional),
+            ("testtypeMismatched", testtypeMismatched),
+            ("testtypeMismatchedInMidFlow", testtypeMismatchedInMidFlow),
+            ("testArray", testArray),
+            ("testArrayWithOptionalSafe", testArrayWithOptionalSafe),
+            ("testArrayWithOptional", testArrayWithOptional),
+            ("testDictionary", testDictionary),
+            ("testDictionaryWithOptionalSafe", testDictionaryWithOptionalSafe),
+            ("testDictionaryWithOptionalSafe2", testDictionaryWithOptionalSafe2),
+            ("testDictionaryWithOptional", testDictionaryWithOptional),
+            ("testEnum", testEnum),
+            ("testEnumFailure", testEnumFailure)
+        ]
     }
-
 }

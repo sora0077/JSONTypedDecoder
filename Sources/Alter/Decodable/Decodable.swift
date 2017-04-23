@@ -12,21 +12,31 @@ public protocol Decodable {
     static func decode(_ decoder: Decoder) throws -> Self
 }
 
-public protocol PrimitiveDecodable: Decodable {}
-
-extension PrimitiveDecodable {
-    public static func decode(_ decoder: Decoder) throws -> Self {
-        return try _decode(decoder)
-    }
-
+extension Decodable {
     static func _decode(_ decoder: Decoder) throws -> Self {
         return try castOrFail(decoder)
     }
+
+    public static func decode(_ decoder: Decoder) throws -> Self {
+        return try _decode(decoder)
+    }
 }
 
-private func castOrFail<T>(_ decoder: Decoder) throws -> T {
-    return try castOrFail(decoder.rawValue)
+public protocol PrimitiveDecodable: Decodable {
+    init?(_ text: String, radix: Int)
+
+    static func decode(from number: NSNumber) -> Self
 }
+
+#if !os(Linux)
+    private func castOrFail<T>(_ decoder: Decoder) throws -> T {
+        return try castOrFail(decoder.rawValue)
+    }
+#else
+    func castOrFail<T>(_ decoder: Decoder) throws -> T {
+        return try castOrFail(decoder.rawValue)
+    }
+#endif
 
 private func castOrFail<T>(_ any: Any) throws -> T {
     guard let result = any as? T else {
