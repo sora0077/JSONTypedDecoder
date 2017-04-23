@@ -9,18 +9,18 @@
 import Foundation
 
 extension PrimitiveDecodable {
-    #if !os(Linux)
+//    #if !os(Linux)
     public static func decode(_ decoder: Decoder) throws -> Self {
         return try decode(from: NSNumber.decode(decoder))
     }
-    #else
-    public static func decode(_ decoder: Decoder) throws -> Self {
-        guard let value = self.init("\(decoder.rawValue)", radix: 10) else {
-            throw DecodeError.typeMismatch(expected: self, actual: decoder.rawValue, keyPath: .empty)
-        }
-        return value
-    }
-    #endif
+//    #else
+//    public static func decode(_ decoder: Decoder) throws -> Self {
+//        guard let value = self.init("\(decoder.rawValue)", radix: 10) else {
+//            throw DecodeError.typeMismatch(expected: self, actual: decoder.rawValue, keyPath: .empty)
+//        }
+//        return value
+//    }
+//    #endif
 }
 
 extension NSNumber: Decodable {
