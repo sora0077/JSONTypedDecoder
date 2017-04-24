@@ -8,7 +8,11 @@
 
 import Foundation
 
-var DecoderClass: Decoder.Type = JSONDecoder.self
+private var DecoderClass: Decoder.Type = JSONDecoder.self
+
+public func register(_ decoderClass: Decoder.Type) {
+    DecoderClass = decoderClass
+}
 
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> T where T: Decodable {
     return try T.decode(DecoderClass.init(any, rootKeyPath: rootKeyPath))
