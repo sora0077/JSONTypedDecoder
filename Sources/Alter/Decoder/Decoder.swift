@@ -18,7 +18,7 @@ public protocol Decoder {
     func decode<T>(forKeyPath keyPath: KeyPath) throws -> [String: T?] where T: Decodable
 }
 
-public func optional<T>(_ value: @autoclosure () throws -> T?, _ cond: (DecodeError) -> Bool) throws -> T? {
+public func optional<T>(_ value: @autoclosure () throws -> T?, _ cond: (DecodeError) -> Bool) rethrows -> T? {
     do {
         return try value()
     } catch let error as DecodeError where cond(error) {
@@ -26,7 +26,7 @@ public func optional<T>(_ value: @autoclosure () throws -> T?, _ cond: (DecodeEr
     }
 }
 
-public func optional<T>(_ value: @autoclosure () throws -> T?) throws -> T? {
+public func optional<T>(_ value: @autoclosure () throws -> T?) rethrows -> T? {
     return try optional(value()) { error in
         switch error {
         case .missingKeyPath: return true
