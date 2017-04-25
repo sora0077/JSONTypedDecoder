@@ -18,4 +18,12 @@ extension Decoder {
             return val
         }
     }
+
+    public func decode<T>(forKeyPath keyPath: KeyPath, optional: Bool) throws -> [T]? where T: Decodable {
+        do {
+            return try decode(forKeyPath: keyPath, skipInvalidElements: false)
+        } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(missing: missing, for: keyPath) {
+            return nil
+        }
+    }
 }

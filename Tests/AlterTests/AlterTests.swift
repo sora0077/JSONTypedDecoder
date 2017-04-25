@@ -9,7 +9,7 @@
 import XCTest
 @testable import Alter
 
-// swiftlint:disable nesting type_body_length
+// swiftlint:disable nesting type_body_length file_length
 class AlterTests: XCTestCase {
 
     override func setUp() {
@@ -159,11 +159,11 @@ class AlterTests: XCTestCase {
         let keyPath: KeyPath = [1, "title", "val"]
 
         do {
-            let val: String? = try optional(decoder.decode(forKeyPath: keyPath))
+            let val: String? = try decoder.decode(forKeyPath: keyPath, optional: true)
             XCTAssertNil(val)
-            let arr: [String]? = try optional(decoder.decode(forKeyPath: keyPath))
+            let arr: [String]? = try decoder.decode(forKeyPath: keyPath, optional: true)
             XCTAssertNil(arr)
-            let dic: [String: Int]? = try optional(decoder.decode(forKeyPath: keyPath))
+            let dic: [String: Int]? = try decoder.decode(forKeyPath: keyPath, optional: true)
             XCTAssertNil(dic)
         } catch {
             XCTFail("\(error)")
@@ -284,7 +284,7 @@ class AlterTests: XCTestCase {
         let decoder = JSONDecoder(data)
         let keyPath: KeyPath = "dictionary"
         do {
-            let ret: [String: Int]? = try optional(decoder.decode(forKeyPath: ["a"]))
+            let ret: [String: Int]? = try decoder.decode(forKeyPath: ["a"], optional: true)
             XCTAssertNil(ret)
             let _: [String: Int] = try decoder.decode(forKeyPath: keyPath)
             XCTFail()
@@ -326,6 +326,57 @@ class AlterTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
+
+    func testNestingDecodeMissing() {
+        struct Test: Decodable {
+            let a: Int
+
+            static func decode(_ decoder: Decoder) throws -> Test {
+                return try self.init(a: decoder.decode(forKeyPath: "a"))
+            }
+        }
+        struct Nest: Decodable {
+            let test: Test?
+
+            static func decode(_ decoder: Decoder) throws -> Nest {
+                return try self.init(test: decoder.decode(forKeyPath: "test", optional: true))
+            }
+        }
+
+        do {
+            let data: Any = ["test": ["a": 1]]
+            let nest = try decode(data) as Nest
+            XCTAssertEqual(nest.test?.a, 1)
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: [AnyHashable: [AnyHashable: Any?]] = ["test": ["a": nil]]
+            _ = try decode(data) as Nest
+            XCTFail()
+        } catch let DecodeError.typeMismatch(expected, _, keyPath) {
+            XCTAssertEqual("\(expected)", "\(Int.self)")
+            XCTAssertEqual(keyPath, ["test", "a"])
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: [AnyHashable: [AnyHashable: Any?]] = ["test": ["b": 1]]
+            _ = try decode(data) as Nest
+            XCTFail()
+        } catch DecodeError.missingKeyPath(let missing) {
+            XCTAssertEqual(missing, ["test", "a"])
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: [AnyHashable: [AnyHashable: Any?]] = ["other": ["b": 1]]
+            let nest = try decode(data) as Nest
+            XCTAssertNil(nest.test)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
 }
 
 extension AlterTests {
@@ -348,7 +399,8 @@ extension AlterTests {
             ("testDictionaryWithOptionalSafe2", testDictionaryWithOptionalSafe2),
             ("testDictionaryWithOptional", testDictionaryWithOptional),
             ("testEnum", testEnum),
-            ("testEnumFailure", testEnumFailure)
+            ("testEnumFailure", testEnumFailure),
+            ("testNestingDecodeMissing", testNestingDecodeMissing)
         ]
     }
 }
