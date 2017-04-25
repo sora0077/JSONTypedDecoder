@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D942FE491EAEFA1E00C9E5CB /* Decoder+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D942FE481EAEFA1E00C9E5CB /* Decoder+Value.swift */; };
 		D9A5F1D91EAB26FD00A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F1D01EAB26FD00A4D894 /* Alter.framework */; };
 		D9A5F1E01EAB26FD00A4D894 /* Alter-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A5F1D21EAB26FD00A4D894 /* Alter-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A5F2111EAB27E700A4D894 /* Alter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A5F2081EAB27E700A4D894 /* Alter.framework */; };
@@ -78,6 +79,7 @@
 		A57AB0B9DCEDD3510E6BCDF0 /* Pods-Alter-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alter-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Alter-iOS/Pods-Alter-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A71B85993B46DFF9CD49C0DA /* Pods_Alter_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alter_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E5E5F3ECD93072E0E37980 /* Pods-Alter-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alter-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Alter-iOSTests/Pods-Alter-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		D942FE481EAEFA1E00C9E5CB /* Decoder+Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Value.swift"; sourceTree = "<group>"; };
 		D9A5F1D01EAB26FD00A4D894 /* Alter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A5F1D21EAB26FD00A4D894 /* Alter-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Alter-iOS.h"; sourceTree = "<group>"; };
 		D9A5F1D31EAB26FD00A4D894 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		D9A5F27A1EAB2AE500A4D894 /* Decoder */ = {
 			isa = PBXGroup;
 			children = (
+				D942FE481EAEFA1E00C9E5CB /* Decoder+Value.swift */,
 				D9A5F27B1EAB2AE500A4D894 /* Decoder+Array.swift */,
 				D9A5F27C1EAB2AE500A4D894 /* Decoder+Dictionary.swift */,
 				D9A5F27D1EAB2AE500A4D894 /* Decoder+Transform.swift */,
@@ -518,6 +521,7 @@
 				D9A5F2971EAB2AE500A4D894 /* decode.swift in Sources */,
 				D9A5F2891EAB2AE500A4D894 /* Decodable+StdLib.swift in Sources */,
 				D9A5F2911EAB2AE500A4D894 /* Decoder+Transform.swift in Sources */,
+				D942FE491EAEFA1E00C9E5CB /* Decoder+Value.swift in Sources */,
 				D9A5F28B1EAB2AE500A4D894 /* Decodable.swift in Sources */,
 				D9A5F29D1EAB2AE500A4D894 /* Utils.swift in Sources */,
 				D9A5F2991EAB2AE500A4D894 /* JSONDecoder.swift in Sources */,

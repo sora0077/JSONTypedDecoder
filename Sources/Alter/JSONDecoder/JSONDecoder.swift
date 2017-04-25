@@ -123,10 +123,32 @@ extension JSONDecoder {
     }
 }
 
+#if os(macOS)
+    extension JSONDecoder {
+        func decode<T>(forKeyPath keyPath: KeyPath, optional: Bool) throws -> T? where T: Decodable {
+            do {
+                return try decode(forKeyPath: keyPath)
+            } catch DecodeError.missingKeyPath(let missing) where checkOptional(missing: missing, for: keyPath) {
+                return nil
+            }
+        }
+    }
+#endif
+
 // MARK: - util
+private func optional<T>(_ value: @autoclosure () throws -> T?, _ cond: (DecodeError) -> Bool) rethrows -> T? {
+    do {
+        return try value()
+    } catch let error as DecodeError where cond(error) {
+        return nil
+    }
+}
+
 private func wrapError<T>(for keyPath: KeyPath, value: @autoclosure () throws -> T) throws -> T {
     do {
         return try value()
+    } catch let DecodeError.missingKeyPath(missing) {
+        throw DecodeError.missingKeyPath(keyPath + missing)
     } catch let DecodeError.typeMismatch(expected, actual, mismatched) {
         throw DecodeError.typeMismatch(expected: expected, actual: actual, keyPath: keyPath + mismatched)
     }

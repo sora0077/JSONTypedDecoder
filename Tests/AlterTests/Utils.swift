@@ -65,7 +65,7 @@ func <| (decoder: Decoder, keyPath: KeyPath) throws -> Any {
 
 /// - Throws: DecodeError or an arbitrary ErrorType
 func <|? <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> T? {
-    return try optional(decoder.decode(forKeyPath: keyPath))
+    return try decoder.decode(forKeyPath: keyPath, optional: true)
 }
 
 /// - Throws: DecodeError or an arbitrary ErrorType
@@ -75,7 +75,7 @@ func <|| <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> [T] {
 
 /// - Throws: DecodeError or an arbitrary ErrorType
 func <||? <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> [T]? {
-    return try optional(decoder.decode(forKeyPath: keyPath))
+    return try decoder.decode(forKeyPath: keyPath, optional: true)
 }
 
 /// - Throws: DecodeError or an arbitrary ErrorType
@@ -85,5 +85,5 @@ func <|-| <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> [String: 
 
 /// - Throws: DecodeError or an arbitrary ErrorType
 func <|-|? <T: Decodable>(decoder: Decoder, keyPath: KeyPath) throws -> [String: T]? {
-    return try optional(decoder.decode(forKeyPath: keyPath))
+    return try decoder.decode(forKeyPath: keyPath, optional: true)
 }
