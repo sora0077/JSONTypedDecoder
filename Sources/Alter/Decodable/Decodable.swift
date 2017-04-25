@@ -16,10 +16,6 @@ extension Decodable {
     static func _decode(_ decoder: Decoder) throws -> Self {
         return try castOrFail(decoder)
     }
-
-    public static func decode(_ decoder: Decoder) throws -> Self {
-        return try _decode(decoder)
-    }
 }
 
 public protocol PrimitiveDecodable: Decodable {
