@@ -377,6 +377,45 @@ class AlterTests: XCTestCase {
             XCTFail("\(error)")
         }
     }
+
+    func testTopLevelOptional() {
+        struct Test: Decodable {
+            let a: Int
+
+            static func decode(_ decoder: Decoder) throws -> Test {
+                return try self.init(a: decoder.decode(forKeyPath: "a"))
+            }
+        }
+
+        do {
+            let data: Any = ["test": ["a": 1]]
+            let test = try decode(data, rootKeyPath: "test") as Test
+            XCTAssertEqual(test.a, 1)
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: Any = ["test": ["b": 1]]
+            let test = try decode(data, rootKeyPath: "test", optional: true) as Test?
+            XCTAssertNil(test)
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: Any = ["other": ["a": 1]]
+            let test = try decode(data, rootKeyPath: "test", optional: true) as Test?
+            XCTAssertNil(test)
+        } catch {
+            XCTFail("\(error)")
+        }
+        do {
+            let data: Any = ["b": 1]
+            let test = try decode(data, optional: true) as Test?
+            XCTAssertNil(test)
+        } catch {
+            XCTFail("\(error)")
+        }
+    }
 }
 
 extension AlterTests {
