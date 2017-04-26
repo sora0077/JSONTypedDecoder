@@ -13,7 +13,7 @@ public struct KeyPath {
         case key(String)
         case index(Int)
     }
-    static let empty: KeyPath = []
+    public static let empty: KeyPath = []
     fileprivate let components: [Component]
 
     public init(_ components: Component...) {
