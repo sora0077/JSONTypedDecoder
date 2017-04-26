@@ -396,8 +396,10 @@ class AlterTests: XCTestCase {
         }
         do {
             let data: Any = ["test": ["b": 1]]
-            let test = try decode(data, rootKeyPath: "test", optional: true) as Test?
-            XCTAssertNil(test)
+            _ = try decode(data, rootKeyPath: "test", optional: true) as Test?
+            XCTFail()
+        } catch DecodeError.missingKeyPath(let missing) {
+            XCTAssertEqual(missing, "a")
         } catch {
             XCTFail("\(error)")
         }
@@ -410,8 +412,10 @@ class AlterTests: XCTestCase {
         }
         do {
             let data: Any = ["b": 1]
-            let test = try decode(data, optional: true) as Test?
-            XCTAssertNil(test)
+            _ = try decode(data, optional: true) as Test?
+            XCTFail()
+        } catch DecodeError.missingKeyPath(let missing) {
+            XCTAssertEqual(missing, "a")
         } catch {
             XCTFail("\(error)")
         }

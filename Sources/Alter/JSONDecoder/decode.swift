@@ -14,6 +14,10 @@ public func register(_ decoderClass: Decoder.Type) {
     DecoderClass = decoderClass
 }
 
+private func checkOptional(_ rootKeyPath: KeyPath?, missing: KeyPath) -> Bool {
+    return rootKeyPath == missing
+}
+
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> T where T: Decodable {
     return try T.decode(DecoderClass.init(any, rootKeyPath: rootKeyPath))
 }
@@ -21,7 +25,7 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil) throws -> T where
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, optional: Bool) throws -> T? where T: Decodable {
     do {
         return try T.decode(DecoderClass.init(any, rootKeyPath: rootKeyPath))
-    } catch DecodeError.missingKeyPath where optional {
+    } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(rootKeyPath, missing: missing) {
         return nil
     }
 }
@@ -55,7 +59,7 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElemen
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, optional: Bool) throws -> [T?]? where T: Decodable {
     do {
         return try decode(any, rootKeyPath: rootKeyPath)
-    } catch DecodeError.missingKeyPath where optional {
+    } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(rootKeyPath, missing: missing) {
         return nil
     }
 }
@@ -64,7 +68,7 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElemen
     where T: Decodable {
     do {
         return try decode(any, rootKeyPath: rootKeyPath)
-    } catch DecodeError.missingKeyPath where optional {
+    } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(rootKeyPath, missing: missing) {
         return nil
     }
 }
@@ -95,7 +99,7 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElemen
 public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, optional: Bool) throws -> [String: T?]? where T: Decodable {
     do {
         return try decode(any, rootKeyPath: rootKeyPath)
-    } catch DecodeError.missingKeyPath where optional {
+    } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(rootKeyPath, missing: missing) {
         return nil
     }
 }
@@ -104,7 +108,7 @@ public func decode<T>(_ any: Any, rootKeyPath: KeyPath? = nil, skipInvalidElemen
     where T: Decodable {
     do {
         return try decode(any, rootKeyPath: rootKeyPath)
-    } catch DecodeError.missingKeyPath where optional {
+    } catch DecodeError.missingKeyPath(let missing) where optional && checkOptional(rootKeyPath, missing: missing) {
         return nil
     }
 }
